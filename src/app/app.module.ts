@@ -9,11 +9,14 @@ import { TutorialState } from './state/tutorial.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
 @NgModule({
     declarations: [
         AppComponent,
         ReadComponent,
-        CreateComponent
+        CreateComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -22,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
         NgxsLoggerPluginModule.forRoot(),
         AppRoutingModule
     ],
-    providers: [],
+    providers: [AuthService]
+    ,
     bootstrap: [AppComponent]
 })
 export class AppModule { }

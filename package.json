@@ -25,7 +25,9 @@
     "@ngxs/schematics": "0.0.1-alpha.5",
     "@ngxs/store": "^3.3.2",
     "auth0-js": "^9.10.1",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
