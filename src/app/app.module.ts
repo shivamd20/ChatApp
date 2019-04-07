@@ -8,6 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { TutorialState } from './state/tutorial.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -18,7 +19,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
         BrowserModule,
         NgxsModule.forRoot([TutorialState]),
         NgxsReduxDevtoolsPluginModule.forRoot(),
-        NgxsLoggerPluginModule.forRoot()
+        NgxsLoggerPluginModule.forRoot(),
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]
