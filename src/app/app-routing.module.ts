@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { LoginComponent } from './login/login.component';
+import { ReadComponent } from './read/read.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,11 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    }, {
+        path: 'profile',
+        component: UserComponent
     }
+
 ];
 
 @NgModule({

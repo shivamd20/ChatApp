@@ -1,24 +1,18 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Auth0 - Angular</a>
+<div class="container ">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <button class="btn btn-primery ">
+          <br>
+          <h3 class="card-title  text-center" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+            Log In with auth0
+          </h3>
 
-      <button class="btn btn-primary btn-margin" routerLink="/">
-        Home
-      </button>
-
-      <button class="btn btn-primary btn-margin" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
-        Log In
-      </button>
-
-      <button class="btn btn-primary btn-margin" *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
-        Log Out
-      </button>
-
+          <h3 class="card-title  text-center" *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
+            Log Out
+          </h3>
+        </button>
+      </div>
     </div>
   </div>
-</nav>
-
-<main class="container">
-  <router-outlet></router-outlet>
-</main>
+</div>

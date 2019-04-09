@@ -11,12 +11,14 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 @NgModule({
     declarations: [
         AppComponent,
         ReadComponent,
         CreateComponent,
-        LoginComponent
+        LoginComponent,
+        UserComponent
     ],
     imports: [
         BrowserModule,

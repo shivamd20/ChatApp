@@ -43,7 +43,7 @@ export class AuthService {
                 this.localLogin(authResult);
                 this.router.navigate(['/']);
             } else if (err) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/login']);
                 console.log(err);
             }
         });
@@ -83,6 +83,23 @@ export class AuthService {
         // Check whether the current time is past the
         // access token's expiry time
         return this._accessToken && Date.now() < this._expiresAt;
+    }
+
+    // ...
+    userProfile: any;
+
+    //...
+    public getProfile(cb): void {
+        if (!this._accessToken) {
+            throw new Error('Access Token must exist to fetch profile');
+        }
+
+        this.auth0.client.userInfo(this._accessToken, (err, profile) => {
+            if (profile) {
+                this.userProfile = profile;
+            }
+            cb(err, profile);
+        });
     }
 
 }
