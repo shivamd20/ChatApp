@@ -1,7 +1,7 @@
 // Section 1
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Tutorial } from './../models/tutorial.model';
-import { AddTutorial, RemoveTutorial } from './../actions/tutorial.actions';
+import { Tutorial } from './models/tutorial.model';
+import { AddTutorial, RemoveTutorial } from './actions/tutorial.actions';
 
 // Section 2
 export class TutorialStateModel {

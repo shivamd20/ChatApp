@@ -14,7 +14,7 @@ export class AuthService {
         domain: 'shivamd20.auth0.com',
         responseType: 'token id_token',
         redirectUri: 'http://localhost:4200/',
-        scope: 'openid'
+        scope: 'openid profile'
     });
 
     constructor(public router: Router) {
@@ -38,10 +38,12 @@ export class AuthService {
     // ...
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
+            console.log(authResult);
+
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.localLogin(authResult);
-                this.router.navigate(['/']);
+                this.router.navigate(['/profile']);
             } else if (err) {
                 this.router.navigate(['/login']);
                 console.log(err);
