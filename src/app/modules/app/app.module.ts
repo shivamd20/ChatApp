@@ -13,6 +13,10 @@ import { LoginComponent } from '../../components/login/login.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TutorialState } from '../ngrxstate/state/tutorial.state';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { environment } from 'src/environments/environment';
+import { AuthState } from '../ngrxstate/state/auth.state';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -23,11 +27,14 @@ import { TutorialState } from '../ngrxstate/state/tutorial.state';
     ],
     imports: [
         BrowserModule,
-        NgxsModule.forRoot([TutorialState]),
+        NgxsModule.forRoot([TutorialState, AuthState], { developmentMode: !environment.production }),
         NgxsReduxDevtoolsPluginModule.forRoot(),
         NgxsLoggerPluginModule.forRoot(),
         AppRoutingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        NgxsStoragePluginModule.forRoot({
+            key: 'auth.accessToken'
+        })
     ],
     providers: [AuthService]
     ,

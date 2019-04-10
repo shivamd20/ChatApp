@@ -25,6 +25,7 @@
     "@ngxs/devtools-plugin": "^3.3.2",
     "@ngxs/logger-plugin": "^3.3.2",
     "@ngxs/schematics": "0.0.1-alpha.5",
+    "@ngxs/storage-plugin": "^3.4.3",
     "@ngxs/store": "^3.3.2",
     "auth0-js": "^9.10.1",
     "bootstrap": "^4.3.1",

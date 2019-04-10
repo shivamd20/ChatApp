@@ -1,7 +1,7 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout } from '../actions/auth.action';
+import { Login, Logout, SaveAuthData } from '../actions/auth.action';
 
 
 @State<AuthStateModel>({
@@ -10,17 +10,29 @@ import { Login, Logout } from '../actions/auth.action';
 export class AuthState {
 
     @Selector()
-    static token(state: AuthStateModel) { return state.token; }
+    static token(state: AuthStateModel) { return state.accessToken; }
 
     constructor(private authService: AuthService) { }
 
     @Action(Login)
-    login({ patchState }: StateContext<AuthStateModel>, { payload: { username } }: Login) {
+    login() {
         return this.authService.login();
     }
 
     @Action(Logout)
-    logout({ setState, getState }: StateContext<AuthStateModel>) {
+    logout({ }: StateContext<AuthStateModel>) {
         return this.authService.logout();
+    }
+
+    @Action(SaveAuthData)
+    saveAuthData(ctx: StateContext<AuthStateModel>, action: SaveAuthData) {
+        console.log(action, JSON.stringify(action));
+        const state = ctx.getState();
+        ctx.setState(
+            {
+                ...state,
+                ...action.payload
+            }
+        );
     }
 }

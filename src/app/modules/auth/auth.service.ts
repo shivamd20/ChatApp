@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
+import { Store } from '@ngxs/store';
+import { state } from '@angular/animations';
+import { Login, SaveAuthData, Logout } from '../ngrxstate/actions/auth.action';
+import { AuthState } from '../ngrxstate/state/auth.state';
+import { AuthStateModel } from '../ngrxstate/models/auth.model';
 
 @Injectable()
 export class AuthService {
 
-    private _idToken: string;
-    private _accessToken: string;
-    private _expiresAt: number;
 
     auth0 = new auth0.WebAuth({
         clientID: 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu',
@@ -17,19 +19,20 @@ export class AuthService {
         scope: 'openid profile'
     });
 
-    constructor(public router: Router) {
-        this._idToken = '';
-        this._accessToken = '';
-        this._expiresAt = 0;
+    authState: AuthStateModel = {
+        accessToken: undefined,
+        expiresAt: undefined,
+        idToken: undefined
+    };
+
+    constructor(private router: Router, private store: Store) {
+        this.store.select(state => state.auth).subscribe(data => {
+            console.log('logging', data);
+
+            return this.authState;
+        });
     }
 
-    get accessToken(): string {
-        return this._accessToken;
-    }
-
-    get idToken(): string {
-        return this._idToken;
-    }
 
     public login(): void {
         this.auth0.authorize();
@@ -52,11 +55,12 @@ export class AuthService {
     }
 
     private localLogin(authResult): void {
-        // Set the time that the access token will expire at
         const expiresAt = (authResult.expiresIn * 1000) + Date.now();
-        this._accessToken = authResult.accessToken;
-        this._idToken = authResult.idToken;
-        this._expiresAt = expiresAt;
+        this.store.dispatch(new SaveAuthData({
+            accessToken: authResult.accessToken,
+            expiresAt: expiresAt,
+            idToken: authResult.idToken,
+        }));
     }
 
     public renewTokens(): void {
@@ -71,20 +75,13 @@ export class AuthService {
     }
 
     public logout(): void {
-        // Remove tokens and expiry time
-        this._accessToken = '';
-        this._idToken = '';
-        this._expiresAt = 0;
-
-        this.auth0.logout({
-            return_to: window.location.origin
-        });
+        this.store.dispatch(new Logout());
     }
 
     public isAuthenticated(): boolean {
         // Check whether the current time is past the
         // access token's expiry time
-        return this._accessToken && Date.now() < this._expiresAt;
+        return this.authState.accessToken && Date.now() < this.authState.expiresAt;
     }
 
     // ...
@@ -92,11 +89,11 @@ export class AuthService {
 
     //...
     public getProfile(cb): void {
-        if (!this._accessToken) {
+        if (!this.authState.accessToken) {
             throw new Error('Access Token must exist to fetch profile');
         }
 
-        this.auth0.client.userInfo(this._accessToken, (err, profile) => {
+        this.auth0.client.userInfo(this.authState.accessToken, (err, profile) => {
             if (profile) {
                 this.userProfile = profile;
             }

@@ -1,4 +1,5 @@
 export class AuthStateModel {
-    token: string;
-    username: string;
+    idToken: string;
+    accessToken: string;
+    expiresAt: number;
 }
