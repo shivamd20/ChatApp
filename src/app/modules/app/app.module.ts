@@ -12,7 +12,7 @@ import { AuthService } from '../auth/auth.service';
 import { LoginComponent } from '../../components/login/login.component';
 import { ProfileComponent } from '../../components/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TutorialState } from '../state/tutorial.state';
+import { TutorialState } from '../ngrxstate/state/tutorial.state';
 @NgModule({
     declarations: [
         AppComponent,
