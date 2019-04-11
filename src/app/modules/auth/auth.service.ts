@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { state } from '@angular/animations';
 import { Login, SaveAuthData, Logout } from '../ngrxstate/actions/auth.action';
-import { AuthState } from '../ngrxstate/state/auth.state';
 import { AuthStateModel } from '../ngrxstate/models/auth.model';
 
 @Injectable()
@@ -27,9 +25,7 @@ export class AuthService {
 
     constructor(private router: Router, private store: Store) {
         this.store.select(state => state.auth).subscribe(data => {
-            console.log('logging', data);
-
-            return this.authState;
+            this.authState = data;
         });
     }
 
@@ -41,15 +37,12 @@ export class AuthService {
     // ...
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
-            console.log(authResult);
-
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.localLogin(authResult);
                 this.router.navigate(['/profile']);
             } else if (err) {
                 this.router.navigate(['/login']);
-                console.log(err);
             }
         });
     }

@@ -26,7 +26,6 @@ export class AuthState {
 
     @Action(SaveAuthData)
     saveAuthData(ctx: StateContext<AuthStateModel>, action: SaveAuthData) {
-        console.log(action, JSON.stringify(action));
         const state = ctx.getState();
         ctx.setState(
             {
