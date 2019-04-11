@@ -1,13 +1,21 @@
-<div class="panel panel-default profile-area">
-  <div class="panel-heading">
-    <h3>Profile</h3>
-  </div>
-  <div class="panel-body">
-    <img src="{{profile?.picture}}" class="avatar" alt="avatar">
-    <div>
-      <label><i class="glyphicon glyphicon-user"></i> Nickname</label>
-      <h3 class="nickname">{{ profile?.nickname }}</h3>
-    </div>
-    <pre class="full-profile">{{ profile | json }}</pre>
-  </div>
-</div>
+<mat-card>
+  <mat-spinner *ngIf="!profile;" [ngStyle]="{'margin': 'auto'}"></mat-spinner>
+  <mat-card-header *ngIf="profile;">
+    <img mat-card-avatar class="example-header-image" [src]="profile?.picture" />
+    <mat-card-title>{{ profile?.given_name }}</mat-card-title>
+    <mat-card-subtitle>{{profile?.nickname}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{profile?.picture}}" alt="Photo of a Shiba Inu" class="profilepic" *ngIf="profile;" />
+  <!-- <mat-card-content>
+    <p>
+      {{ profile | json }}
+    </p>
+  </mat-card-content> -->
+  <mat-card-actions *ngIf="profile;">
+    <button mat-button (click)="logout()">LOGOUT</button>
+  </mat-card-actions>
+</mat-card>
+
+{{
+    profile | json
+}}

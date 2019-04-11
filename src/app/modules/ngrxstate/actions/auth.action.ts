@@ -9,10 +9,18 @@ export class Logout {
 }
 
 export class SaveAuthData {
-    static readonly type = '[Auth] Logout';
+    static readonly type = '[Auth] SaveAuthData';
     constructor(public payload: {
         accessToken,
         idToken,
         expiresAt
     }) { }
+}
+export class ClearAuth {
+    static readonly type = '[Auth] Clear Auth';
+}
+
+
+export class GetProfile {
+    static readonly type = '[Auth] GetProfile';
 }

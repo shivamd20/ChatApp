@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button class="example-spacer" mat-button (click)="drawer.toggle()">
+      <img alt="fdgd" mat-card-avatar
+        src="https://lh6.googleusercontent.com/-cpGv6Fv3rDU/AAAAAAAAAAI/AAAAAAAAFHY/i3FVMRazoyI/photo.jpg" />
+    </button>
+    <span>My App</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-drawer-container class="container">
+  <mat-drawer #drawer mode="side" position="start">
+    <app-profile></app-profile>
+  </mat-drawer>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

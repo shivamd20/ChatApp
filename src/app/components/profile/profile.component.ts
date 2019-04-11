@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../modules/auth/auth.service';
+import { Store } from '@ngxs/store';
+import { Logout, GetProfile } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
     selector: 'app-profile',
@@ -8,14 +10,16 @@ import { AuthService } from '../../modules/auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
     profile: any;
-    constructor(public auth: AuthService) { }
+    constructor(public auth: AuthService, private store: Store) { }
+
+    logout() {
+        this.auth.logout();
+    }
+
     ngOnInit() {
-        if (this.auth.userProfile) {
-            this.profile = this.auth.userProfile;
-        } else {
-            this.auth.getProfile((err, profile) => {
-                this.profile = profile;
-            });
-        }
+        this.store.select(state => state.auth.profile).subscribe(profile => {
+            this.profile = profile;
+        });
+        this.store.dispatch(new GetProfile());
     }
 }

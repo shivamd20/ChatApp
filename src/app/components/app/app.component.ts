@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/modules/auth/auth.service';
 })
 export class AppComponent implements OnInit {
     title = 'ngxs-intro';
+    showFiller = false;
     constructor(private auth: AuthService) {
         auth.handleAuthentication();
     }

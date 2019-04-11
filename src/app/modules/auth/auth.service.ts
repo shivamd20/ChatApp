@@ -2,15 +2,22 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { Login, SaveAuthData, Logout } from '../ngrxstate/actions/auth.action';
+import { Login, SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
 import { AuthStateModel } from '../ngrxstate/models/auth.model';
 
+const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 @Injectable()
 export class AuthService {
 
+    constructor(private router: Router, private store: Store) {
+        this.store.select(state => state.auth).subscribe(data => {
+            this.authState = data;
+        });
+    }
+
 
     auth0 = new auth0.WebAuth({
-        clientID: 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu',
+        clientID: CLIENT_ID,
         domain: 'shivamd20.auth0.com',
         responseType: 'token id_token',
         redirectUri: 'http://localhost:4200/',
@@ -20,14 +27,15 @@ export class AuthService {
     authState: AuthStateModel = {
         accessToken: undefined,
         expiresAt: undefined,
-        idToken: undefined
+        idToken: undefined,
+        profile: Object
     };
 
-    constructor(private router: Router, private store: Store) {
-        this.store.select(state => state.auth).subscribe(data => {
-            this.authState = data;
-        });
-    }
+    // ...
+    userProfile: any;
+
+    //...
+    public async
 
 
     public login(): void {
@@ -40,8 +48,8 @@ export class AuthService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.localLogin(authResult);
-                this.router.navigate(['/profile']);
             } else if (err) {
+                console.log(err);
                 this.router.navigate(['/login']);
             }
         });
@@ -50,9 +58,8 @@ export class AuthService {
     private localLogin(authResult): void {
         const expiresAt = (authResult.expiresIn * 1000) + Date.now();
         this.store.dispatch(new SaveAuthData({
-            accessToken: authResult.accessToken,
             expiresAt: expiresAt,
-            idToken: authResult.idToken,
+            ...authResult
         }));
     }
 
@@ -61,37 +68,40 @@ export class AuthService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.localLogin(authResult);
             } else if (err) {
-                alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
-                this.logout();
+                alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
+                this.store.dispatch(new Logout());
             }
         });
     }
 
-    public logout(): void {
-        this.store.dispatch(new Logout());
+    logout() {
+        this.store.dispatch(new ClearAuth());
+        this.auth0.logout({
+            returnTo: 'http://localhost:4200',
+            clientID: CLIENT_ID
+
+        });
+
     }
+
 
     public isAuthenticated(): boolean {
         // Check whether the current time is past the
         // access token's expiry time
         return this.authState.accessToken && Date.now() < this.authState.expiresAt;
     }
+    getProfile(accessToken) {
+        return new Promise((resolve, reject) => {
 
-    // ...
-    userProfile: any;
+            this.auth0.client.userInfo(accessToken, (err, profile) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(profile);
+            });
 
-    //...
-    public getProfile(cb): void {
-        if (!this.authState.accessToken) {
-            throw new Error('Access Token must exist to fetch profile');
-        }
+        })
 
-        this.auth0.client.userInfo(this.authState.accessToken, (err, profile) => {
-            if (profile) {
-                this.userProfile = profile;
-            }
-            cb(err, profile);
-        });
     }
 
 }

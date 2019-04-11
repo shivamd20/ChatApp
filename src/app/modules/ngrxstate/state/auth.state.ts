@@ -1,7 +1,7 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout, SaveAuthData } from '../actions/auth.action';
+import { Login, Logout, SaveAuthData, ClearAuth, GetProfile } from '../actions/auth.action';
 
 
 @State<AuthStateModel>({
@@ -20,8 +20,20 @@ export class AuthState {
     }
 
     @Action(Logout)
-    logout({ }: StateContext<AuthStateModel>) {
-        return this.authService.logout();
+    logout(ctx: StateContext<AuthStateModel>) {
+
+        this.authService.logout();
+        ctx.dispatch(ClearAuth);
+    }
+
+    @Action(ClearAuth)
+    clearAuth(ctx: StateContext<AuthStateModel>) {
+        ctx.setState({
+            accessToken: undefined,
+            expiresAt: undefined,
+            idToken: undefined,
+            profile: undefined
+        });
     }
 
     @Action(SaveAuthData)
@@ -33,5 +45,23 @@ export class AuthState {
                 ...action.payload
             }
         );
+    }
+
+    @Action(GetProfile)
+    async  getProfile(ctx: StateContext<AuthStateModel>, action: GetProfile) {
+        const state = ctx.getState();
+        try {
+            const profile = await this.authService.getProfile(state.accessToken);
+            ctx.setState(
+                {
+                    ...state,
+                    profile: profile
+                }
+            );
+        }
+        catch (e) {
+            console.log(GetProfile.type, e);
+
+        }
     }
 }

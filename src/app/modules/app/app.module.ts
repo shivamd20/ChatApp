@@ -16,6 +16,13 @@ import { TutorialState } from '../ngrxstate/state/tutorial.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { environment } from 'src/environments/environment';
 import { AuthState } from '../ngrxstate/state/auth.state';
+import { MatCardModule } from '@angular/material/card';
+import { ParallaxModule, ParallaxConfig } from 'ngx-parallax';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -27,14 +34,19 @@ import { AuthState } from '../ngrxstate/state/auth.state';
     ],
     imports: [
         BrowserModule,
+        MatCardModule,
+        ParallaxModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
         NgxsModule.forRoot([TutorialState, AuthState], { developmentMode: !environment.production }),
         NgxsReduxDevtoolsPluginModule.forRoot(),
         NgxsLoggerPluginModule.forRoot(),
         AppRoutingModule,
         BrowserAnimationsModule,
-        NgxsStoragePluginModule.forRoot({
-            key: 'auth.accessToken'
-        })
+        MatSidenavModule,
+        MatToolbarModule,
+        MatIconModule,
+        NgxsStoragePluginModule.forRoot()
     ],
     providers: [AuthService]
     ,
