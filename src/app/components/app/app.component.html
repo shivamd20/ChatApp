@@ -8,11 +8,11 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-drawer-container class="container">
+<mat-drawer-container>
   <mat-drawer #drawer mode="side" position="start">
     <app-profile></app-profile>
   </mat-drawer>
-  <div>
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 

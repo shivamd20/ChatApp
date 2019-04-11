@@ -1,5 +1,4 @@
 <mat-card *ngFor="let profile of [profile$ | async]">
-  <mat-spinner *ngIf="!profile;" [ngStyle]="{'margin': 'auto'}"></mat-spinner>
   <mat-card-header *ngIf="profile;">
     <img mat-card-avatar class="example-header-image" [src]="profile?.picture" />
     <mat-card-title>{{ profile?.given_name }}</mat-card-title>
@@ -13,6 +12,9 @@
   </mat-card-content> -->
   <mat-card-actions *ngIf="profile;">
     <button mat-button (click)="logout()">LOGOUT</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf="!profile;">
+    <button mat-button (click)="login()">LOGIN</button>
   </mat-card-actions>
 </mat-card>
 

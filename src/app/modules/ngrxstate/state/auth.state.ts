@@ -61,7 +61,6 @@ export class AuthState {
         }
         catch (e) {
             console.log(GetProfile.type, e);
-            ctx.setState(ctx.getState())
         }
     }
 }

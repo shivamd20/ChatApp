@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../modules/auth/auth.service';
 import { Store } from '@ngxs/store';
-import { Logout, GetProfile } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Logout, GetProfile, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
     selector: 'app-profile',
@@ -13,7 +13,11 @@ export class ProfileComponent implements OnInit {
     constructor(public auth: AuthService, private store: Store) { }
 
     logout() {
-        this.auth.logout();
+        this.store.dispatch(new Logout());
+    }
+
+    login() {
+        this.store.dispatch(new Login());
     }
 
     ngOnInit() {
