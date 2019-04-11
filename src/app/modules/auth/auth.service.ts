@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { Login, SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
+import { SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
 import { AuthStateModel } from '../ngrxstate/models/auth.model';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
@@ -10,9 +10,6 @@ const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 export class AuthService {
 
     constructor(private router: Router, private store: Store) {
-        this.store.select(state => state.auth).subscribe(data => {
-            this.authState = data;
-        });
     }
 
 
@@ -24,12 +21,7 @@ export class AuthService {
         scope: 'openid profile'
     });
 
-    authState: AuthStateModel = {
-        accessToken: undefined,
-        expiresAt: undefined,
-        idToken: undefined,
-        profile: Object
-    };
+
 
     // ...
     userProfile: any;
@@ -84,12 +76,6 @@ export class AuthService {
         });
     }
 
-
-    public isAuthenticated(): boolean {
-        // Check whether the current time is past the
-        // access token's expiry time
-        return this.authState.accessToken && Date.now() < this.authState.expiresAt;
-    }
     getProfile(accessToken) {
         return new Promise((resolve, reject) => {
 
