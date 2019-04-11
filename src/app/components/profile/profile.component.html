@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngFor="let profile of [profile$ | async]">
   <mat-spinner *ngIf="!profile;" [ngStyle]="{'margin': 'auto'}"></mat-spinner>
   <mat-card-header *ngIf="profile;">
     <img mat-card-avatar class="example-header-image" [src]="profile?.picture" />
@@ -16,6 +16,6 @@
   </mat-card-actions>
 </mat-card>
 
-{{
-    profile | json
-}}
+<!-- {{
+    profile$ | async | json
+}} -->

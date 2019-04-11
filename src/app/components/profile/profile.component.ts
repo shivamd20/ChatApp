@@ -9,7 +9,7 @@ import { Logout, GetProfile } from 'src/app/modules/ngrxstate/actions/auth.actio
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-    profile: any;
+    profile$: any;
     constructor(public auth: AuthService, private store: Store) { }
 
     logout() {
@@ -17,9 +17,7 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.select(state => state.auth.profile).subscribe(profile => {
-            this.profile = profile;
-        });
+        this.profile$ = this.store.select(state => state.auth.profile);
         this.store.dispatch(new GetProfile());
     }
 }

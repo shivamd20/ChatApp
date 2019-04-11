@@ -69,6 +69,8 @@ export class AuthService {
                 this.localLogin(authResult);
             } else if (err) {
                 alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
+                console.log(JSON.stringify(err, null, 4));
+
                 this.store.dispatch(new Logout());
             }
         });
@@ -79,9 +81,7 @@ export class AuthService {
         this.auth0.logout({
             returnTo: 'http://localhost:4200',
             clientID: CLIENT_ID
-
         });
-
     }
 
 
