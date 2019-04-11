@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
 import { SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
-import { AuthStateModel } from '../ngrxstate/models/auth.model';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 @Injectable()
