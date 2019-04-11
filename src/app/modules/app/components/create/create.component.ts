@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { AddTutorial } from '../../modules/ngrxstate/actions/tutorial.actions';
+import { AddTutorial } from 'src/app/modules/ngrxstate/actions/tutorial.actions';
 
 @Component({
     selector: 'app-create',

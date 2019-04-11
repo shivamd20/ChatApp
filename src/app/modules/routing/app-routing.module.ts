@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateComponent } from '../../components/create/create.component';
-import { ReadComponent } from '../../components/read/read.component';
-import { ProfileComponent } from '../../components/profile/profile.component';
+import { ProfileComponent } from '../app/components/profile/profile.component';
 
 
 const routes: Routes = [
