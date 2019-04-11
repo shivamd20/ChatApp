@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../modules/auth/auth.service';
 import { Store } from '@ngxs/store';
 import { Logout, GetProfile, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
 
@@ -10,7 +9,7 @@ import { Logout, GetProfile, Login } from 'src/app/modules/ngrxstate/actions/aut
 })
 export class ProfileComponent implements OnInit {
     profile$: any;
-    constructor(public auth: AuthService, private store: Store) { }
+    constructor(private store: Store) { }
 
     logout() {
         this.store.dispatch(new Logout());
