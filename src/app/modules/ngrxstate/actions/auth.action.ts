@@ -23,3 +23,8 @@ export class ClearAuth {
 export class GetProfile {
     static readonly type = '[Auth] GetProfile';
 }
+
+
+export class ParseHash {
+    static readonly type = '[Auth] ParseHash';
+}

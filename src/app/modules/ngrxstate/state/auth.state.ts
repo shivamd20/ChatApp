@@ -1,7 +1,7 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout, SaveAuthData, ClearAuth, GetProfile } from '../actions/auth.action';
+import { Login, Logout, SaveAuthData, ClearAuth, GetProfile, ParseHash } from '../actions/auth.action';
 
 
 @State<AuthStateModel>({
@@ -38,13 +38,7 @@ export class AuthState {
 
     @Action(SaveAuthData)
     saveAuthData(ctx: StateContext<AuthStateModel>, action: SaveAuthData) {
-        const state = ctx.getState();
-        ctx.setState(
-            {
-                ...state,
-                ...action.payload
-            }
-        );
+        ctx.patchState({ ...action.payload });
     }
 
     @Action(GetProfile)
@@ -62,5 +56,10 @@ export class AuthState {
         catch (e) {
             console.log(GetProfile.type, e);
         }
+    }
+
+    @Action(ParseHash)
+    parseHash(ctx: StateContext<AuthStateModel>, action: GetProfile) {
+        this.authService.handleAuthentication();
     }
 }

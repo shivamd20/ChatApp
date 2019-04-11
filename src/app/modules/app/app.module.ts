@@ -20,8 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
         AppRoutingModule,
         MaterialModule,
         StateModule
-    ],
-    providers: [AuthService]
+    ]
     ,
     bootstrap: [AppComponent]
 })

@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.profile$ = this.store.select(state => state.auth.profile);
         this.store.dispatch(new GetProfile());
+        this.profile$ = this.store.select(state => state.auth.profile);
     }
 }
