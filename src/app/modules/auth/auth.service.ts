@@ -20,15 +20,6 @@ export class AuthService {
         scope: 'openid profile'
     });
 
-
-
-    // ...
-    userProfile: any;
-
-    //...
-    public async
-
-
     public login(): void {
         this.auth0.authorize();
     }
@@ -81,8 +72,7 @@ export class AuthService {
             this.auth0.client.userInfo(accessToken, (err, profile) => {
                 if (err) {
                     reject(err);
-                }
-                resolve(profile);
+                } else { resolve(profile); }
             });
 
         })
