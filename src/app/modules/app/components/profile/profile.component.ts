@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Logout, GetProfile, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Store, Actions, ofActionCompleted, ofActionDispatched, Select } from '@ngxs/store';
+import { Logout, GetProfile, Login, SaveAuthData } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
     selector: 'app-profile',
@@ -8,8 +8,13 @@ import { Logout, GetProfile, Login } from 'src/app/modules/ngrxstate/actions/aut
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+
+    @Select(state => state.auth.profile)
     profile$: any;
-    constructor(private store: Store) { }
+
+
+    constructor(private store: Store, private actions: Actions) { }
 
     logout() {
         this.store.dispatch(new Logout());
@@ -20,7 +25,6 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new GetProfile());
-        this.profile$ = this.store.select(state => state.auth.profile);
+        this.actions.pipe(ofActionCompleted(SaveAuthData)).subscribe(d => this.store.dispatch(new GetProfile()))
     }
 }

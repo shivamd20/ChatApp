@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfileComponent } from '../app/components/profile/profile.component';
 
 
 const routes: Routes = [
     {
         path: '**',
-        component: ProfileComponent
+        redirectTo: '/'
     },
 
 ];
