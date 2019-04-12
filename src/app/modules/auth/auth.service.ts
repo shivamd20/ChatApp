@@ -16,7 +16,7 @@ export class AuthService {
         clientID: CLIENT_ID,
         domain: 'shivamd20.auth0.com',
         responseType: 'token id_token',
-        redirectUri: 'http://localhost:4200/',
+        redirectUri: 'http://localhost:4200/authorize',
         scope: 'openid profile'
     });
 
