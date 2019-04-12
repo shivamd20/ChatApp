@@ -1,8 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button class="example-spacer" mat-button (click)="drawer.toggle()">
-      <img alt="fdgd" mat-card-avatar
-        src="https://lh6.googleusercontent.com/-cpGv6Fv3rDU/AAAAAAAAAAI/AAAAAAAAFHY/i3FVMRazoyI/photo.jpg" />
+      <img alt="fdgd" mat-card-avatar src="{{(profilePicUrl$ | async)}}" />
     </button>
     <span>My App</span>
   </mat-toolbar-row>

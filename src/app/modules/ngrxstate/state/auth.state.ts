@@ -2,7 +2,7 @@ import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
 import { Login, Logout, SaveAuthData, ClearAuth, GetProfile, ParseHash } from '../actions/auth.action';
-
+import { produce } from 'immer';
 
 @State<AuthStateModel>({
     name: 'auth'
@@ -46,12 +46,10 @@ export class AuthState {
         const state = ctx.getState();
         try {
             const profile = await this.authService.getProfile(state.accessToken);
-            ctx.setState(
-                {
-                    ...state,
-                    profile: profile
-                }
-            );
+
+            const nextState = produce(state, (draftState) => Object.assign(draftState, { profile }));
+
+            ctx.setState(nextState);
         }
         catch (e) {
             console.log(GetProfile.type, e);

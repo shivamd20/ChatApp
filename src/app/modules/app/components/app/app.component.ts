@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/modules/auth/auth.service';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
@@ -11,6 +11,10 @@ import { ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
 export class AppComponent implements OnInit {
     title = 'ngxs-intro';
     showFiller = false;
+
+    @Select(state => state.auth.profile.picture)
+    profilePicUrl$;
+
     constructor(private store: Store) {
         store.dispatch(new ParseHash());
     }
