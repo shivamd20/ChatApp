@@ -10,7 +10,6 @@ import { ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
 })
 export class AppComponent implements OnInit {
     title = 'ngxs-intro';
-    showFiller = false;
 
     @Select(state => state.auth.profile.picture)
     profilePicUrl$;
