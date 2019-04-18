@@ -6,6 +6,7 @@ import { AuthState } from './state/auth.state';
 import { environment } from 'src/environments/environment';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { AuthModule } from '../auth/auth.module';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AuthModule } from '../auth/auth.module';
         NgxsLoggerPluginModule.forRoot(),
         NgxsStoragePluginModule.forRoot(
         ),
+        NgxsRouterPluginModule.forRoot(),
         AuthModule.forRoot()
     ],
 
