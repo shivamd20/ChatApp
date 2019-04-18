@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
 import { SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
@@ -8,7 +7,7 @@ const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 @Injectable()
 export class AuthService {
 
-    constructor(private router: Router, private store: Store) {
+    constructor(private store: Store) {
     }
 
 
@@ -32,7 +31,6 @@ export class AuthService {
                 this.localLogin(authResult);
             } else if (err) {
                 console.log(err);
-                this.router.navigate(['/login']);
             }
         });
     }
