@@ -61,7 +61,7 @@ export class AuthState {
     }
 
     @Action(ParseHash)
-    parseHash(ctx: StateContext<AuthStateModel>, action: GetProfile) {
+    parseHash(ctx: StateContext<AuthStateModel>, action: ParseHash) {
         this.authService.handleAuthentication();
     }
 }
