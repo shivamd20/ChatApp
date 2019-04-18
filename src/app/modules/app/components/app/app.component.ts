@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 
 @Component({
     selector: 'app-root',
