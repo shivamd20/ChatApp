@@ -38,11 +38,15 @@ export class AuthState {
 
     @Action(SaveAuthData)
     saveAuthData(ctx: StateContext<AuthStateModel>, action: SaveAuthData) {
-        ctx.patchState({ ...action.payload });
+
+        const state = ctx.getState();
+        const nextState = produce(state, (draftState) => Object.assign(draftState, { ...action.payload }));
+
+        ctx.setState(nextState);
     }
 
     @Action(GetProfile)
-    async  getProfile(ctx: StateContext<AuthStateModel>, action: GetProfile) {
+    async  getProfile(ctx: StateContext<AuthStateModel>) {
         const state = ctx.getState();
         try {
             const profile = await this.authService.getProfile(state.accessToken);

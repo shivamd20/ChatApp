@@ -11,8 +11,8 @@ import { ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
 export class AppComponent implements OnInit {
     title = 'ngxs-intro';
 
-    @Select(state => state.auth.profile.picture)
-    profilePicUrl$;
+    @Select(state => (state.auth.profile) ? state.auth.profile.picture : undefined)
+    picture$;
 
     constructor(private store: Store) {
         store.dispatch(new ParseHash());
