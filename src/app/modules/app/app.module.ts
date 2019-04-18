@@ -5,10 +5,12 @@ import { MaterialModule } from '../material/material.module';
 import { StateModule } from '../ngrxstate/state.module';
 import { AppComponent } from './components/app/app.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthenticateComponent } from './components/authenticate/authenticate.component';
 @NgModule({
     declarations: [
         AppComponent,
-        ProfileComponent
+        ProfileComponent,
+        AuthenticateComponent
     ],
     imports: [
         BrowserModule,

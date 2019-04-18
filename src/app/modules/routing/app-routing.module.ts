@@ -1,9 +1,14 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticateComponent } from '../app/components/authenticate/authenticate.component';
 
 
 const routes: Routes = [
+    {
+        path: 'authorize',
+        component: AuthenticateComponent
+    },
     {
         path: '**',
         redirectTo: '/'
