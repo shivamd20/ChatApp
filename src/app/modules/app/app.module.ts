@@ -8,11 +8,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
 import { GraphQLModule } from '../graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TempComponent } from './components/temp/temp.component';
 @NgModule({
     declarations: [
         AppComponent,
         ProfileComponent,
-        AuthenticateComponent
+        AuthenticateComponent,
+        TempComponent
     ],
     imports: [
         BrowserModule,
