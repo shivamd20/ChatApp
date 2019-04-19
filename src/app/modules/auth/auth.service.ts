@@ -24,29 +24,25 @@ export class AuthService {
     }
 
     // ...
-    public handleAuthentication(): void {
-        this.auth0.parseHash((err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                window.location.hash = '';
-                this.localLogin(authResult);
-            } else if (err) {
-                throw err;
-            }
-        });
+    public handleAuthentication(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.auth0.parseHash((err, authResult) => {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    window.location.hash = '';
+                    resolve(authResult);
+                } else if (err) {
+                    reject(err);
+                }
+            });
+        })
     }
 
-    private localLogin(authResult): void {
-        const expiresAt = (authResult.expiresIn * 1000) + Date.now();
-        this.store.dispatch(new SaveAuthData({
-            expiresAt: expiresAt,
-            ...authResult
-        }));
-    }
+
 
     public renewTokens(): void {
         this.auth0.checkSession({}, (err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                this.localLogin(authResult);
+                //TODO this.localLogin(authResult);
             } else if (err) {
                 alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
                 console.log(JSON.stringify(err, null, 4));

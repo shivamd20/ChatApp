@@ -1,7 +1,7 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout, SaveAuthData, ClearAuth, GetProfile, ParseHash, SaveUserInDataBase } from '../actions/auth.action';
+import { Login, Logout, ClearAuth, GetProfile, ParseHash, SaveUserInDataBase } from '../actions/auth.action';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 
@@ -37,22 +37,12 @@ export class AuthState {
         });
     }
 
-    @Action(SaveAuthData)
-    saveAuthData(ctx: StateContext<AuthStateModel>, action: SaveAuthData) {
-        const state = ctx.getState();
-        const nextState = produce(state, (draftState) => Object.assign(draftState, { ...action.payload }));
-        ctx.setState(nextState);
-        ctx.dispatch(new SaveUserInDataBase());
-    }
-
     @Action(GetProfile)
     async  getProfile(ctx: StateContext<AuthStateModel>) {
         const state = ctx.getState();
         try {
             const profile = await this.authService.getProfile(state.accessToken);
-
             const nextState = produce(state, (draftState) => Object.assign(draftState, { profile }));
-
             ctx.setState(nextState);
         }
         catch (e) {
@@ -61,12 +51,19 @@ export class AuthState {
     }
 
     @Action(ParseHash)
-    parseHash(ctx: StateContext<AuthStateModel>, action: ParseHash) {
-        this.authService.handleAuthentication();
+    async parseHash(ctx: StateContext<AuthStateModel>, action: ParseHash) {
+        const authResult = await this.authService.handleAuthentication();
+        const expiresAt = (authResult.expiresIn * 1000) + Date.now();
+        const state = ctx.getState();
+        const nextState = produce(state, (draftState) => Object.assign(draftState, {
+            expiresAt: expiresAt,
+            ...authResult
+        }));
+        ctx.setState(nextState);
     }
 
     @Action(SaveUserInDataBase)
     saveUserInDataBase(ctx: StateContext<AuthStateModel>, action: ParseHash) {
-        this.userService.saveUserInDatabase();
+        this.userService.saveUserInDatabase(ctx.getState()).subscribe();
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { ParseHash, SaveUserInDataBase } from 'src/app/modules/ngrxstate/actions/auth.action';
 import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
@@ -15,6 +15,6 @@ export class AuthenticateComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new ParseHash()).subscribe(d => this.store.dispatch(new Navigate(['/'])));
+        this.store.dispatch([new ParseHash()]);
     }
 }
