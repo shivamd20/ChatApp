@@ -21,7 +21,6 @@ import { split } from 'apollo-link';
                     uri: 'https://ramu420.herokuapp.com/v1alpha1/graphql',
                     get headers() {
                         const authToken = (JSON.parse(localStorage.getItem('auth')) || {}).idToken;
-                        console.log(authToken);
                         return new HttpHeaders({ 'Authorization': 'Bearer ' + authToken });
                     }
                 });
@@ -35,7 +34,6 @@ import { split } from 'apollo-link';
                         connectionParams: {
                             get headers() {
                                 const authToken = (JSON.parse(localStorage.getItem('auth')) || {}).idToken;
-                                console.log(authToken);
                                 return {
                                     'Authorization': 'Bearer ' + authToken,
                                 }

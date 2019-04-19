@@ -1,7 +1,7 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout, ClearAuth, GetProfile, ParseHash, SaveUserInDataBase } from '../actions/auth.action';
+import { Login, Logout, ClearState, GetProfile, ParseHash, SaveUserInDataBase } from '../actions/auth.action';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 
@@ -9,9 +9,6 @@ import { UserService } from '../../graphql/services/user.service';
     name: 'auth'
 })
 export class AuthState {
-
-    @Selector()
-    static token(state: AuthStateModel) { return state.accessToken; }
 
     constructor(private authService: AuthService, private userService: UserService) { }
 
@@ -24,11 +21,11 @@ export class AuthState {
     logout(ctx: StateContext<AuthStateModel>) {
 
         this.authService.logout();
-        ctx.dispatch(ClearAuth);
+        ctx.dispatch(ClearState);
     }
 
-    @Action(ClearAuth)
-    clearAuth(ctx: StateContext<AuthStateModel>) {
+    @Action(ClearState)
+    clearState(ctx: StateContext<AuthStateModel>) {
         ctx.setState({
             accessToken: undefined,
             expiresAt: undefined,
@@ -63,7 +60,7 @@ export class AuthState {
     }
 
     @Action(SaveUserInDataBase)
-    saveUserInDataBase(ctx: StateContext<AuthStateModel>, action: ParseHash) {
-        this.userService.saveUserInDatabase(ctx.getState()).subscribe();
+    async saveUserInDataBase(ctx: StateContext<AuthStateModel>, action: ParseHash) {
+        await this.userService.saveUserInDatabase(ctx.getState()).toPromise();
     }
 }

@@ -7,8 +7,8 @@ export class Logout {
     static readonly type = '[Auth] Logout';
 }
 
-export class ClearAuth {
-    static readonly type = '[Auth] Clear Auth';
+export class ClearState {
+    static readonly type = '[Auth] Clear State';
 }
 
 

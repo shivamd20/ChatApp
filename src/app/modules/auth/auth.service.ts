@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { SaveAuthData, Logout, ClearAuth } from '../ngrxstate/actions/auth.action';
+import { Logout, ClearState } from '../ngrxstate/actions/auth.action';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 @Injectable()
@@ -23,7 +23,6 @@ export class AuthService {
         this.auth0.authorize();
     }
 
-    // ...
     public handleAuthentication(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.auth0.parseHash((err, authResult) => {
@@ -34,26 +33,26 @@ export class AuthService {
                     reject(err);
                 }
             });
-        })
-    }
-
-
-
-    public renewTokens(): void {
-        this.auth0.checkSession({}, (err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                //TODO this.localLogin(authResult);
-            } else if (err) {
-                alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
-                console.log(JSON.stringify(err, null, 4));
-
-                this.store.dispatch(new Logout());
-            }
         });
     }
 
+
+    /*TODO
+        public renewTokens(): void {
+            this.auth0.checkSession({}, (err, authResult) => {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    //TODO this.localLogin(authResult);
+                } else if (err) {
+                    alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
+                    console.log(JSON.stringify(err, null, 4));
+                    this.store.dispatch(new Logout());
+                }
+            });
+        }
+        */
+
     logout() {
-        this.store.dispatch(new ClearAuth());
+        this.store.dispatch(new ClearState());
         this.auth0.logout({
             returnTo: 'http://localhost:4200',
             clientID: CLIENT_ID

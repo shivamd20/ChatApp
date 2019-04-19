@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Actions, ofActionCompleted, ofActionDispatched, Select } from '@ngxs/store';
-import { Logout, GetProfile, Login, ParseHash } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Logout, GetProfile, Login, ParseHash, SaveUserInDataBase } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
     selector: 'app-profile',
@@ -25,6 +25,6 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.actions.pipe(ofActionCompleted(ParseHash)).subscribe(d => this.store.dispatch(new GetProfile()));
+        this.actions.pipe(ofActionCompleted(SaveUserInDataBase)).subscribe(d => this.store.dispatch(new GetProfile()));
     }
 }

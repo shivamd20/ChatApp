@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { ParseHash, SaveUserInDataBase } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Store, Actions, } from '@ngxs/store';
+import { ParseHash, GetProfile, SaveUserInDataBase } from 'src/app/modules/ngrxstate/actions/auth.action';
 import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
@@ -10,11 +10,11 @@ import { Navigate } from '@ngxs/router-plugin';
 })
 export class AuthenticateComponent implements OnInit {
 
-    constructor(private store: Store) {
+    constructor(private store: Store, private actions: Actions) {
 
     }
 
     ngOnInit() {
-        this.store.dispatch([new ParseHash()]);
+        this.store.dispatch([new ParseHash()]).subscribe(() => this.store.dispatch(new GetProfile()).subscribe(d => this.store.dispatch(new SaveUserInDataBase())));
     }
 }

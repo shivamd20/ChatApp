@@ -11,7 +11,7 @@ export class UserService {
     constructor(private apollo: Apollo, private store: Store) { }
 
     public saveUserInDatabase(state): Observable<Object> {
-        const { sub: userId, name, picture } = state; //this.store.selectSnapshot(state => state.auth.profile);
+        const { sub: userId, name, picture } = this.store.selectSnapshot(state => state.auth.profile);
         return this.apollo.mutate({
             mutation: gql`
             mutation($name: String, $profile_pic:String, $user_id: String) {
@@ -37,5 +37,4 @@ export class UserService {
         },
         );
     }
-
 }
