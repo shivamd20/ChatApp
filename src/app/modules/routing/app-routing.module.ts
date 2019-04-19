@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticateComponent } from '../app/components/authenticate/authenticate.component';
 import { TempComponent } from '../app/components/temp/temp.component';
+import { ContactsComponent } from '../app/components/contacts/contacts.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'temp',
         component: TempComponent
+    },
+    {
+        path: 'contacts',
+        component: ContactsComponent
     },
     {
         path: '**',

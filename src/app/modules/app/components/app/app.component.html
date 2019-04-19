@@ -1,9 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]">
   <mat-toolbar-row>
-    <button class="example-spacer" mat-button (click)="drawer.toggle()">
-      <img alt="fdgd" mat-card-avatar src="{{(profile$ | async)?.picture}}" />
+    <button class=" example-spacer" mat-button (click)="drawer.toggle()">
+      <img alt="fdgd" mat-card-avatar src="{{(profile)?.picture}}" *ngIf="profile" />
+      <mat-icon mat-list-icon *ngIf="!profile?.picture">person</mat-icon>
     </button>
-    <span>{{ (profile$ | async)?.name }}</span>
+    <span *ngIf="profile">{{ profile.name }}</span>
+    <span *ngIf="!profile"> Ramesh's App </span>
   </mat-toolbar-row>
 </mat-toolbar>
 
