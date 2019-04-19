@@ -1,23 +1,53 @@
 import { NgModule } from '@angular/core';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { HttpLinkModule, HttpLink, HttpLinkHandler } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-
-const uri = 'https://ramu420.herokuapp.com/v1alpha1/graphql'; // <-- add the URL of the GraphQL server here
-export function createApollo(httpLink: HttpLink) {
-    return {
-        link: httpLink.create({ uri }),
-        cache: new InMemoryCache(),
-    };
-}
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { HttpHeaders } from '@angular/common/http';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import { split } from 'apollo-link';
 
 @NgModule({
     exports: [ApolloModule, HttpLinkModule],
     providers: [
         {
             provide: APOLLO_OPTIONS,
-            useFactory: createApollo,
-            deps: [HttpLink],
+            useFactory: (httpLink: HttpLink) => {
+                const handler: HttpLinkHandler = httpLink.create({
+                    uri: 'https://ramu420.herokuapp.com/v1alpha1/graphql',
+                    headers: new HttpHeaders({ 'x-hasura-admin-secret': 'ramu' })
+                });
+
+                const WS_URL = `wss://ramu420.herokuapp.com/v1alpha1/graphql`;
+
+                const wsLink = new WebSocketLink(
+                    new SubscriptionClient(WS_URL, {
+                        reconnect: true,
+                        timeout: 9000,
+                        connectionParams: {
+                            headers: {
+                                'x-hasura-admin-secret': 'ramu',
+                            }
+                        }
+                    })
+                );
+
+                const link = split(
+                    // split based on operation type
+                    ({ query }) => {
+                        const { kind, operation } = getMainDefinition(query);
+                        return kind === 'OperationDefinition' && operation === 'subscription';
+                    },
+                    wsLink,
+                    handler,
+                );
+                return {
+                    cache: new InMemoryCache(),
+                    link: link,
+                };
+            },
+            deps: [HttpLink]
         },
     ],
 })
