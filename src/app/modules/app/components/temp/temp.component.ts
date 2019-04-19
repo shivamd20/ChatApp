@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
+import { UserService } from 'src/app/modules/graphql/services/user.service';
 @Component({
     selector: 'app-temp',
     templateUrl: './temp.component.html',
@@ -11,7 +12,7 @@ export class TempComponent implements OnInit {
 
     games$: Observable<Object>;
 
-    constructor(private apollo: Apollo) { }
+    constructor(private userService: UserService) { }
 
     ngOnInit() {
         this.games$ = this.getGames();
@@ -20,16 +21,8 @@ export class TempComponent implements OnInit {
 
     }
 
-    getGames(): Observable<any> {
-        return this.apollo.subscribe({
-            query: gql`query{
-            ttt_state{
-              data
-              key
-            }
-          }`
-        },
-        );
+    getGames(): any {
+        return this.userService.saveUserInDatabase();
     }
 
 }
