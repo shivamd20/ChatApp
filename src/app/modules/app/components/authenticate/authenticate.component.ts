@@ -17,5 +17,4 @@ export class AuthenticateComponent implements OnInit {
     ngOnInit() {
         this.store.dispatch(new ParseHash()).subscribe(d => this.store.dispatch(new Navigate(['/'])));
     }
-
 }

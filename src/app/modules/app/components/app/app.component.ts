@@ -9,8 +9,8 @@ import { Select } from '@ngxs/store';
 export class AppComponent implements OnInit {
     title = 'ngxs-intro';
 
-    @Select(state => (state.auth.profile) ? state.auth.profile.picture : undefined)
-    picture$;
+    @Select(state => (state.auth.profile))
+    profile$;
 
     ngOnInit(): void {
 

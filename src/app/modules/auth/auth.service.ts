@@ -30,7 +30,7 @@ export class AuthService {
                 window.location.hash = '';
                 this.localLogin(authResult);
             } else if (err) {
-                console.log(err);
+                throw err;
             }
         });
     }

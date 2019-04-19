@@ -16,6 +16,9 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
         NgxsReduxDevtoolsPluginModule.forRoot(),
         NgxsLoggerPluginModule.forRoot(),
         NgxsStoragePluginModule.forRoot(
+            {
+                key: "auth"
+            }
         ),
         NgxsRouterPluginModule.forRoot(),
         AuthModule.forRoot()
