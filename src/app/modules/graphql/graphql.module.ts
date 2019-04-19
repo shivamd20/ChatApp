@@ -8,6 +8,10 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { split } from 'apollo-link';
 
+const authToken = (JSON.parse(localStorage.getItem('auth')) || {}).idToken;
+
+console.log(authToken);
+
 @NgModule({
     exports: [ApolloModule, HttpLinkModule],
     providers: [
@@ -16,7 +20,7 @@ import { split } from 'apollo-link';
             useFactory: (httpLink: HttpLink) => {
                 const handler: HttpLinkHandler = httpLink.create({
                     uri: 'https://ramu420.herokuapp.com/v1alpha1/graphql',
-                    headers: new HttpHeaders({ 'x-hasura-admin-secret': 'ramu' })
+                    headers: new HttpHeaders({ 'Authorization': 'Bearer ' + authToken })
                 });
 
                 const WS_URL = `wss://ramu420.herokuapp.com/v1alpha1/graphql`;
@@ -27,7 +31,7 @@ import { split } from 'apollo-link';
                         timeout: 9000,
                         connectionParams: {
                             headers: {
-                                'x-hasura-admin-secret': 'ramu',
+                                'Authorization': 'Bearer ' + authToken,
                             }
                         }
                     })

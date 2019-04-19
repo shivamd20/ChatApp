@@ -9,14 +9,20 @@ import gql from 'graphql-tag';
 })
 export class TempComponent implements OnInit {
 
+    games$: Observable<Object>;
+
     constructor(private apollo: Apollo) { }
 
     ngOnInit() {
+        this.games$ = this.getGames();
+
+        this.games$.subscribe(d => console.log(d));
+
     }
 
     getGames(): Observable<any> {
         return this.apollo.subscribe({
-            query: gql`subscription($key: uuid){
+            query: gql`query{
             ttt_state{
               data
               key
