@@ -25,6 +25,6 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.actions.pipe(ofActionCompleted(SaveUserInDataBase)).subscribe(d => this.store.dispatch(new GetProfile()));
+
     }
 }

@@ -10,12 +10,14 @@ import { GraphQLModule } from '../graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TempComponent } from './components/temp/temp.component';
 import { UserService } from '../graphql/services/user.service';
+import { ContactsComponent } from './components/contacts/contacts.component';
 @NgModule({
     declarations: [
         AppComponent,
         ProfileComponent,
         AuthenticateComponent,
-        TempComponent
+        TempComponent,
+        ContactsComponent
     ],
     imports: [
         BrowserModule,

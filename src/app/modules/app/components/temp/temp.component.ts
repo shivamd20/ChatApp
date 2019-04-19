@@ -15,13 +15,12 @@ export class TempComponent implements OnInit {
     constructor(private userService: UserService) { }
 
     ngOnInit() {
-        this.games$ = this.getGames();
+        // this.games$ = this.getGames();
 
     }
 
     getGames(): any {
 
-        return this.userService.saveUserInDatabase();
     }
 
 }

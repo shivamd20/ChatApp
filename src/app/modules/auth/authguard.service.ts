@@ -1,4 +1,4 @@
-import { AuthState } from '../ngrxstate/state/auth.state';
+
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
     constructor(private store: Store) { }
 
     canActivate() {
-        return this.store.select(AuthState.token);
+        return this.store.select(state => state.auth.idToken);
     }
 
 }
