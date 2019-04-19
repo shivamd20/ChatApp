@@ -6,6 +6,8 @@ import { StateModule } from '../ngrxstate/state.module';
 import { AppComponent } from './components/app/app.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
+import { GraphQLModule } from '../graphql/graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         AppComponent,
@@ -16,7 +18,9 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
         BrowserModule,
         AppRoutingModule,
         MaterialModule,
-        StateModule
+        StateModule,
+        GraphQLModule,
+        HttpClientModule
     ]
     ,
     bootstrap: [AppComponent]
