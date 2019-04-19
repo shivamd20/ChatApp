@@ -9,6 +9,7 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
 import { GraphQLModule } from '../graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TempComponent } from './components/temp/temp.component';
+import { UserService } from '../graphql/services/user.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -25,6 +26,7 @@ import { TempComponent } from './components/temp/temp.component';
         HttpClientModule
     ]
     ,
+    providers: [UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

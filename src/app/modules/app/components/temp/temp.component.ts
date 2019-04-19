@@ -17,11 +17,10 @@ export class TempComponent implements OnInit {
     ngOnInit() {
         this.games$ = this.getGames();
 
-        this.games$.subscribe(d => console.log(d));
-
     }
 
     getGames(): any {
+
         return this.userService.saveUserInDatabase();
     }
 

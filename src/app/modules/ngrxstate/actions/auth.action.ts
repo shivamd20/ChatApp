@@ -28,3 +28,7 @@ export class GetProfile {
 export class ParseHash {
     static readonly type = '[Auth] ParseHash';
 }
+
+export class SaveUserInDataBase {
+    static readonly type = '[Auth] SaveUserInDataBase';
+}
