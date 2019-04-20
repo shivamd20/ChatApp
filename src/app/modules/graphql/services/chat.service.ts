@@ -19,12 +19,13 @@ export class ChatService implements OnDestroy {
     }
 
     constructor(private apollo: Apollo, private store: Store) {
-        this.getChats();
+
     }
 
-    private getChats() {
-        this.chats$ = this.apollo.subscribe({
-            query: gql`subscription ($user_id: String) {
+    public getChats() {
+        if (!this.chats$ || this.chats$.closed) {
+            this.chats$ = this.apollo.subscribe({
+                query: gql`subscription ($user_id: String) {
                 chat(order_by: {datetime: asc}, where: {_or: [{sender: {_eq: $user_id}},{receiver: {_eq: $user_id}} ]}) {
                   id
                   msg
@@ -42,16 +43,19 @@ export class ChatService implements OnDestroy {
                 }
               }
               `,
-            variables: {
-                'user_id': this.store.snapshot().auth.profile.sub
-            }
-        },
-        ).pipe(map(val => val.data.chat)).subscribe(data => {
-            this.store.dispatch(new SaveChats(data));
-        });
+                variables: {
+                    'user_id': this.store.snapshot().auth.profile.sub
+                }
+            },
+            ).pipe(map(val => val.data.chat)).subscribe(data => {
+                this.store.dispatch(new SaveChats(data));
+            });
+        }
     }
 
-    public sendMessage(msg, sender, receiver): Observable<Object> {
+    public sendMessage(msg, receiver): Observable<Object> {
+
+
         return this.apollo.mutate({
             mutation: gql`mutation ($sender: String, $receiver: String, $msg: String) {
                 insert_chat(objects: {msg: $msg, sender: $sender, receiver: $receiver}) {
@@ -60,8 +64,8 @@ export class ChatService implements OnDestroy {
               }
     `,
             variables: {
-                'sender': sender,
-                'receiver': receiver,
+                'sender': this.store.snapshot().auth.profile.sub,
+                'receiver': receiver.user_id,
                 'msg': msg
             }
         },

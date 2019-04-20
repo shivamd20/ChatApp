@@ -3,6 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { UserService } from 'src/app/modules/graphql/services/user.service';
 import { Observable } from 'apollo-link';
 import { GetContacts, SelectContact } from 'src/app/modules/ngrxstate/actions/chat.action';
+import { ChatService } from 'src/app/modules/graphql/services/chat.service';
 
 export interface Section {
     name: string;
@@ -18,7 +19,7 @@ export class ContactsComponent implements OnInit {
     @Select(state => state.chat.users)
     contacts$: Observable<any>;
 
-    constructor(private store: Store) {
+    constructor(private store: Store, private chatService: ChatService) {
 
     }
 
@@ -28,6 +29,7 @@ export class ContactsComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new GetContacts());
+        this.chatService.getChats();
     }
 
 }

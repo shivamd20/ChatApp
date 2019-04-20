@@ -10,7 +10,9 @@ import { ChatService } from '../../graphql/services/chat.service';
     defaults: {
         chats: [],
         users: [],
-        selectedContact: 'ramesh1'
+        selectedContact: {
+            user_id: 'ramesh1'
+        }
     }
 })
 export class ChatState {
@@ -48,10 +50,8 @@ export class ChatState {
 
 
     @Action(SendMessage)
-    async SendMessage(ctx: StateContext<any>, action: SendMessage) {
+    SendMessage(ctx: StateContext<ChatStateModel>, action: SendMessage) {
         const currentState = ctx.getState();
-        console.log(currentState);
-
-        await this.chatService.sendMessage(action.payload, currentState.auth.profile.sub, currentState.chat.selectedContact).toPromise();
+        this.chatService.sendMessage(action.payload, currentState.selectedContact).toPromise();
     }
 }
