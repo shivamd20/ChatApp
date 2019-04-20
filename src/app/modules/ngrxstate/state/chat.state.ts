@@ -2,7 +2,8 @@ import { StateContext, Action, State } from '@ngxs/store';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 import { ChatStateModel } from '../models/chat.model';
-import { GetContacts, SaveChats, SelectContact } from '../actions/chat.action';
+import { GetContacts, SaveChats, SelectContact, SendMessage } from '../actions/chat.action';
+import { ChatService } from '../../graphql/services/chat.service';
 
 @State<ChatStateModel>({
     name: 'chat',
@@ -14,7 +15,7 @@ import { GetContacts, SaveChats, SelectContact } from '../actions/chat.action';
 })
 export class ChatState {
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private chatService: ChatService) { }
 
     @Action(GetContacts)
     async getContacts(ctx: StateContext<ChatStateModel>) {
@@ -43,5 +44,14 @@ export class ChatState {
             draftState.selectedContact = action.payload;
         }));
         ctx.setState(nextState);
+    }
+
+
+    @Action(SendMessage)
+    async SendMessage(ctx: StateContext<any>, action: SendMessage) {
+        const currentState = ctx.getState();
+        console.log(currentState);
+
+        await this.chatService.sendMessage(action.payload, currentState.auth.profile.sub, currentState.chat.selectedContact).toPromise();
     }
 }

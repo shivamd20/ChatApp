@@ -1,10 +1,11 @@
 <div class="header">
   <app-chatscreencontainer></app-chatscreencontainer>
+
   <div class="header-content">
     <mat-form-field class="input">
-      <textarea matInput placeholder="Write your message here" color="primery"></textarea>
+      <textarea matInput placeholder="Write your message here" color="primery" #textarea></textarea>
     </mat-form-field>
-    <button mat-stroked-button (click)="logout()" color="warn" title="send" class="sendbtn">
+    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea)">
       <mat-icon>send</mat-icon>
     </button>
   </div>

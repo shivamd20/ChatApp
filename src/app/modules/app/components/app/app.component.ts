@@ -7,7 +7,7 @@ import { Select } from '@ngxs/store';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = 'ngxs-intro';
+    title = 'Ramesh';
 
     @Select(state => (state.auth.profile))
     profile$;

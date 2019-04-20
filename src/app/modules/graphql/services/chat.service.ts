@@ -50,4 +50,21 @@ export class ChatService implements OnDestroy {
             this.store.dispatch(new SaveChats(data));
         });
     }
+
+    public sendMessage(msg, sender, receiver): Observable<Object> {
+        return this.apollo.mutate({
+            mutation: gql`mutation ($sender: String, $receiver: String, $msg: String) {
+                insert_chat(objects: {msg: $msg, sender: $sender, receiver: $receiver}) {
+                  affected_rows
+                }
+              }
+    `,
+            variables: {
+                'sender': sender,
+                'receiver': receiver,
+                'msg': msg
+            }
+        },
+        );
+    }
 }

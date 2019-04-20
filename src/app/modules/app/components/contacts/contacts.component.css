@@ -2,4 +2,12 @@ mat-list {
   text-align: left;
   align-content: left;
   height: 100%;
+  font-size: 0%;
+}
+
+button {
+  font-style: normal;
+  font-size: 1em;
+  text-align: left;
+  width: 100%;
 }

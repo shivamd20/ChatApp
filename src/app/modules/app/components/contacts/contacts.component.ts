@@ -23,7 +23,7 @@ export class ContactsComponent implements OnInit {
     }
 
     onClick(user) {
-        this.store.dispatch(new SelectContact(user.user_id));
+        this.store.dispatch(new SelectContact(user));
     }
 
     ngOnInit() {

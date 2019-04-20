@@ -15,8 +15,12 @@ export class SaveChats {
     }>) { }
 }
 
-
 export class SelectContact {
     public static readonly type = '[Chat] SelectContact';
+    constructor(public payload: string) { }
+}
+
+export class SendMessage {
+    public static readonly type = '[Chat] SendMessage';
     constructor(public payload: string) { }
 }
