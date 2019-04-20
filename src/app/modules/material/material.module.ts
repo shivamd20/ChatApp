@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
     declarations: [],
     imports: [
@@ -21,7 +22,8 @@ import { MatListModule } from '@angular/material/list';
         MatIconModule,
         MatCardModule,
         BrowserAnimationsModule,
-        MatListModule
+        MatListModule,
+        MatInputModule
     ]
 })
 export class MaterialModule { }

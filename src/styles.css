@@ -6,13 +6,16 @@
 body {
   max-width: 90em;
   margin: auto;
-  height: 90vh;
+  margin-top: 4vh;
+  height: 92vh;
   color: #fff;
-  background-image: url("http://besthdwallpaper.co/wp-content/uploads/2018/05/whatsapp-background-walldevil.jpg");
+  /* background-image: url("http://besthdwallpaper.co/wp-content/uploads/2018/05/whatsapp-background-walldevil.jpg"); */
   background-size: cover;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }
 
-.trans {
+/* .trans {
   background-color: rgba(1, 1, 1, 0.2);
   background-size: 400% 400%;
-}
+} */

@@ -1,0 +1,35 @@
+.header {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.header-content {
+  position: absolute;
+  bottom: 0;
+  max-height: 25%;
+  width: 80%;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  left: 10%;
+  min-width: 100px;
+}
+
+.header,
+.header * {}
+
+
+.input {
+  width: 100%;
+  padding: 1%;
+}
+
+.sendbtn {
+  float: right;
+  position: absolute;
+  padding: 1%;
+  margin-left: 1%;
+  background-color: azure;
+}

@@ -1,11 +1,8 @@
-<mat-card style="height: 100%;">
-
-  <mat-list>
-    <h2 mat-subheader>Contacts</h2>
-    <mat-list-item *ngFor="let contact of contacts$ | async">
-      <img alt="photo" mat-list-avatar src="{{(contact)?.profile_pic}}" class="left" *ngIf="contact?.profile_pic" />
-      <mat-icon mat-list-avatar *ngIf="!contact?.profile_pic">person</mat-icon>
-      <h2 mat-line>{{contact.name}}</h2>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
+<mat-list>
+  <h2 mat-subheader>Contacts</h2>
+  <mat-list-item *ngFor="let contact of contacts$ | async">
+    <img alt="photo" mat-list-avatar src="{{(contact)?.profile_pic}}" class="left" *ngIf="contact?.profile_pic" />
+    <mat-icon mat-list-avatar *ngIf="!contact?.profile_pic">person</mat-icon>
+    <h2 mat-line>{{contact.name}}</h2>
+  </mat-list-item>
+</mat-list>
