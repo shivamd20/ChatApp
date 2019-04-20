@@ -12,6 +12,9 @@ export class AppComponent implements OnInit {
     @Select(state => (state.auth.profile))
     profile$;
 
+    @Select(state => (state.chat.selectedContact))
+    selectedContact$;
+
     ngOnInit(): void {
 
     }

@@ -11,3 +11,7 @@ button {
   text-align: left;
   width: 100%;
 }
+
+.selected {
+  background-color: beige;
+}

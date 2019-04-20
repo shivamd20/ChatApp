@@ -19,6 +19,9 @@ export class ContactsComponent implements OnInit {
     @Select(state => state.chat.users)
     contacts$: Observable<any>;
 
+    @Select(state => (state.chat.selectedContact))
+    selectedContact$;
+
     constructor(private store: Store, private chatService: ChatService) {
 
     }

@@ -5,7 +5,7 @@
       <button class=" example-spacer" mat-button (click)="contacts.toggle()" *ngIf="profile">
         <mat-icon mat-list-icon>contacts</mat-icon>
       </button>
-      <span *ngIf="profile">{{ profile.name }}</span>
+      <span *ngIf="profile">{{ (selectedContact$ | async).name }}</span>
       <span *ngIf="!profile"> Ramesh's App </span>
 
 
