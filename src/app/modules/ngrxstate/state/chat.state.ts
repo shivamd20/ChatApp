@@ -2,7 +2,7 @@ import { StateContext, Action, State } from '@ngxs/store';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 import { ChatStateModel } from '../models/chat.model';
-import { GetContacts, SaveChats } from '../actions/chat.action';
+import { GetContacts, SaveChats, SelectContact } from '../actions/chat.action';
 
 @State<ChatStateModel>({
     name: 'chat',
@@ -30,7 +30,17 @@ export class ChatState {
     saveChats(ctx: StateContext<ChatStateModel>, action: SaveChats) {
         const currentState = ctx.getState();
         const nextState = produce(currentState, (draftState => {
-            draftState.chats = action.payload.sort((x, y) => x.datatime - y.datatime);
+            draftState.chats = action.payload;
+        }));
+        ctx.setState(nextState);
+    }
+
+
+    @Action(SelectContact)
+    selectContact(ctx: StateContext<ChatStateModel>, action: SelectContact) {
+        const currentState = ctx.getState();
+        const nextState = produce(currentState, (draftState => {
+            draftState.selectedContact = action.payload;
         }));
         ctx.setState(nextState);
     }

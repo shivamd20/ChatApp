@@ -12,8 +12,13 @@ export class ChatscreencontainerComponent implements OnInit {
     constructor(private store: Store, private chatService: ChatService) { }
 
     @Select((state) => {
-        const selectedContact = state.chat.selectedContact;
-        return state.chat.chats.filter((chat) => chat.senderDetail.user_id === selectedContact || chat.receiverDetail.user_id === selectedContact);
+        try {
+            const selectedContact = state.chat.selectedContact;
+            return state.chat.chats.filter((chat) => chat.senderDetail.user_id === selectedContact || chat.receiverDetail.user_id === selectedContact);
+        }
+        catch (e) {
+            console.log(e);
+        }
     })
     chats$;
 

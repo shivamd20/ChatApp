@@ -14,3 +14,9 @@ export class SaveChats {
         };
     }>) { }
 }
+
+
+export class SelectContact {
+    public static readonly type = '[Chat] SelectContact';
+    constructor(public payload: string) { }
+}
