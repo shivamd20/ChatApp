@@ -10,6 +10,21 @@ import { Select, Store } from '@ngxs/store';
 export class UserService {
     constructor(private apollo: Apollo, private store: Store) { }
 
+    public async getContacts() {
+        const result = await this.apollo.query({
+            query: gql`{
+                user {
+                  name
+                  profile_pic
+                  user_id
+                  date_joined
+                }
+              }
+              `
+        }).toPromise();
+        return [];
+    }
+
     public saveUserInDatabase(state): Observable<Object> {
         const { sub: userId, name, picture } = this.store.selectSnapshot(state => state.auth.profile);
         return this.apollo.mutate({

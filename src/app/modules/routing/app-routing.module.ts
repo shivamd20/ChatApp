@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticateComponent } from '../app/components/authenticate/authenticate.component';
 import { TempComponent } from '../app/components/temp/temp.component';
 import { ContactsComponent } from '../app/components/contacts/contacts.component';
+import { ChatscreenComponent } from '../app/components/chatscreen/chatscreen.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: '/'
+        component: ChatscreenComponent
     },
 
 ];

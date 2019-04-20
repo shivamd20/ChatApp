@@ -1,3 +1,4 @@
 mat-list {
-  text-align: left
+  text-align: left;
+  align-content: left;
 }

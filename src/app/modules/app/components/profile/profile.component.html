@@ -1,4 +1,4 @@
-<mat-card *ngFor="let profile of [profile$ | async]">
+<mat-card *ngFor="let profile of [profile$ | async]" style="height: 100%;">
   <mat-card-header *ngIf="profile;">
     <img mat-card-avatar class="example-header-image" [src]="profile?.picture" />
     <mat-card-title>{{ profile?.given_name }}</mat-card-title>
@@ -10,14 +10,20 @@
       {{ profile | json }}
     </p>
   </mat-card-content> -->
-  <mat-card-actions *ngIf="profile;">
-    <button mat-button (click)="logout()">LOGOUT</button>
+  <mat-card-actions *ngIf="profile;" style="margin:auto; text-align: center">
+    <button mat-stroked-button (click)="logout()" color="warn">
+      <mat-icon aria-label="Example icon-button with a heart icon">logout</mat-icon>
+      LOGOUT
+    </button>
   </mat-card-actions>
-  <mat-card-actions *ngIf="!profile;">
-    <button mat-button (click)="login()">LOGIN</button>
-  </mat-card-actions>
-</mat-card>
 
-<!-- {{
+  <mat-card-actions *ngIf="!profile;" style="margin:auto; text-align: center">
+    <button mat-stroked-button (click)="login()" color="primery">
+      <mat-icon aria-label="Example icon-button with a heart icon">logout</mat-icon>
+      LOGIN
+    </button>
+  </mat-card-actions>
+
+  <!-- {{
     profile$ | async | json
 }} -->

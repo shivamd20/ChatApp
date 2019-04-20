@@ -1,16 +1,26 @@
 <mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]">
+
   <mat-toolbar-row>
-    <button class=" example-spacer" mat-button (click)="drawer.toggle()">
-      <img alt="fdgd" mat-card-avatar src="{{(profile)?.picture}}" *ngIf="profile" />
-      <mat-icon mat-list-icon *ngIf="!profile?.picture">person</mat-icon>
+    <button class=" example-spacer" mat-button (click)="contacts.toggle()" *ngIf="profile">
+      <mat-icon mat-list-icon>contacts</mat-icon>
     </button>
     <span *ngIf="profile">{{ profile.name }}</span>
     <span *ngIf="!profile"> Ramesh's App </span>
+
+
+    <button class="right" mat-button (click)="drawer2.toggle()">
+      <img alt="photo" src="{{(profile)?.picture}}" mat-card-avatar *ngIf="profile" />
+      <mat-icon mat-list-icon *ngIf="!profile?.picture">person</mat-icon>
+    </button>
   </mat-toolbar-row>
+
 </mat-toolbar>
 
 <mat-drawer-container>
-  <mat-drawer #drawer mode="side" position="start">
+  <mat-drawer #contacts mode="side" position="start">
+    <app-contacts></app-contacts>
+  </mat-drawer>
+  <mat-drawer #drawer2 mode="side" position="end">
     <app-profile></app-profile>
   </mat-drawer>
   <div class="container">

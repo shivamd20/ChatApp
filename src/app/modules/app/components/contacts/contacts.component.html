@@ -1,11 +1,13 @@
-<mat-card>
+<mat-card style="height: 100%;">
+
   <mat-list>
     <h2 mat-subheader>Contacts</h2>
     <mat-list-item *ngFor="let contact of contacts">
-      <mat-icon mat-list-icon>person</mat-icon>
+      <img alt="photo" mat-list-avatar src="{{(contact)?.profile_pic}}" class="left" *ngIf="contact?.profile_pic" />
+      <mat-icon mat-list-avatar *ngIf="!contact?.profile_pic">person</mat-icon>
       <h2 mat-line>{{contact.name}}</h2>
-      <p mat-line> {{contact.user_id}} </p>
-      <p mat-line> {{contact.date_joined | date}} </p>
+      <!-- <p mat-line> {{contact.user_id}} </p>
+      <p mat-line> {{contact.date_joined | date}} </p> -->
     </mat-list-item>
   </mat-list>
 </mat-card>

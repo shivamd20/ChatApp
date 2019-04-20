@@ -11,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { TempComponent } from './components/temp/temp.component';
 import { UserService } from '../graphql/services/user.service';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { ChatscreenComponent } from './components/chatscreen/chatscreen.component';
 @NgModule({
     declarations: [
         AppComponent,
         ProfileComponent,
         AuthenticateComponent,
         TempComponent,
-        ContactsComponent
+        ContactsComponent,
+        ChatscreenComponent
     ],
     imports: [
         BrowserModule,
