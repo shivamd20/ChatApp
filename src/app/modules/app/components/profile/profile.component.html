@@ -12,14 +12,14 @@
   </mat-card-content> -->
   <mat-card-actions *ngIf="profile;" style="margin:auto; text-align: center">
     <button mat-stroked-button (click)="logout()" color="warn">
-      <mat-icon aria-label="Example icon-button with a heart icon">logout</mat-icon>
+      <mat-icon>logout</mat-icon>
       LOGOUT
     </button>
   </mat-card-actions>
 
   <mat-card-actions *ngIf="!profile;" style="margin:auto; text-align: center">
-    <button mat-stroked-button (click)="login()" color="primery">
-      <mat-icon aria-label="Example icon-button with a heart icon">logout</mat-icon>
+    <button mat-stroked-button (click)="login()" color="primary">
+      <mat-icon>person</mat-icon>
       LOGIN
     </button>
   </mat-card-actions>

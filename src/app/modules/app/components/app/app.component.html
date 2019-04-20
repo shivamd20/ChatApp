@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]">
+<mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]" class="trans">
 
   <mat-toolbar-row>
     <button class=" example-spacer" mat-button (click)="contacts.toggle()" *ngIf="profile">
@@ -16,9 +16,9 @@
 
 </mat-toolbar>
 
-<mat-drawer-container>
+<mat-drawer-container class="trans">
   <mat-drawer #contacts mode="side" position="start">
-    <app-contacts></app-contacts>
+    <app-contacts class="trans"></app-contacts>
   </mat-drawer>
   <mat-drawer #drawer2 mode="side" position="end">
     <app-profile></app-profile>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { UserService } from 'src/app/modules/graphql/services/user.service';
+import { Observable } from 'apollo-link';
+import { GetContacts } from 'src/app/modules/ngrxstate/actions/chat.action';
 
 export interface Section {
     name: string;
@@ -13,15 +15,15 @@ export interface Section {
 })
 export class ContactsComponent implements OnInit {
 
-    contacts = [
-    ];
+    @Select(state => state.chat.users)
+    contacts$: Observable<any>;
 
-    constructor(private store: Store, private userService: UserService) {
+    constructor(private store: Store) {
 
     }
 
-    async ngOnInit() {
-        this.contacts = await this.userService.getContacts();
+    ngOnInit() {
+        this.store.dispatch(new GetContacts());
     }
 
 }
