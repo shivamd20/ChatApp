@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
+import { ApolloQueryResult } from 'apollo-client';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
     constructor(private apollo: Apollo, private store: Store) { }
 
     public async getContacts() {
-        const result = await this.apollo.query({
+        const result: ApolloQueryResult<any> = await this.apollo.query({
             query: gql`{
                 user {
                   name
@@ -22,7 +23,7 @@ export class UserService {
               }
               `
         }).toPromise();
-        return [];
+        return result.data.user;
     }
 
     public saveUserInDatabase(state): Observable<Object> {
