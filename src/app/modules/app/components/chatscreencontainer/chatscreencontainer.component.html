@@ -6,7 +6,9 @@
     <img src="{{chat?.senderDetail?.profile_pic}}" alt="Avatar" [ngClass]="{
         'right':  chat?.senderDetail?.user_id === me
     }">
-    <p>{{chat.msg}}</p>
+    <p>{{chat.msg}} {{ chat | json }}</p>
+
+
     <span class="time-right">{{ chat.datetime | date: 'medium' }}</span>
   </div>
 </div>

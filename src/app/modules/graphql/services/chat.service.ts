@@ -34,6 +34,11 @@ export class ChatService implements OnDestroy {
                     user_id
                     name
                   }
+                  receiverDetail {
+                    profile_pic
+                    user_id
+                    name
+                  }
                 }
               }
               `,

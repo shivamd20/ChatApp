@@ -9,6 +9,7 @@ import { GetContacts, SaveChats } from '../actions/chat.action';
     defaults: {
         chats: [],
         users: [],
+        selectedContact: 'ramesh1'
     }
 })
 export class ChatState {
