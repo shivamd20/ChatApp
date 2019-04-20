@@ -9,7 +9,6 @@ import { UserService } from 'src/app/modules/graphql/services/user.service';
 export class ChatscreenComponent implements OnInit {
 
     constructor(private userService: UserService) { }
-
     ngOnInit() {
         this.userService.getContacts();
     }

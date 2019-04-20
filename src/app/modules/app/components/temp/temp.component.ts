@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
 import { UserService } from 'src/app/modules/graphql/services/user.service';
+import { ChatService } from 'src/app/modules/graphql/services/chat.service';
 @Component({
     selector: 'app-temp',
     templateUrl: './temp.component.html',
@@ -10,17 +11,15 @@ import { UserService } from 'src/app/modules/graphql/services/user.service';
 })
 export class TempComponent implements OnInit {
 
-    games$: Observable<Object>;
+    chats$: Observable<Object>;
 
-    constructor(private userService: UserService) { }
+    constructor(private chatService: ChatService) { }
 
     ngOnInit() {
-        // this.games$ = this.getGames();
+        //   this.chats$ = this.getChats();
 
     }
 
-    getGames(): any {
 
-    }
 
 }

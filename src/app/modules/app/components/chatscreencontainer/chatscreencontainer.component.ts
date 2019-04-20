@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { ChatService } from 'src/app/modules/graphql/services/chat.service';
 
 @Component({
-  selector: 'app-chatscreencontainer',
-  templateUrl: './chatscreencontainer.component.html',
-  styleUrls: ['./chatscreencontainer.component.css']
+    selector: 'app-chatscreencontainer',
+    templateUrl: './chatscreencontainer.component.html',
+    styleUrls: ['./chatscreencontainer.component.css']
 })
 export class ChatscreencontainerComponent implements OnInit {
 
-  constructor() { }
+    constructor(private store: Store, private chatService: ChatService) { }
 
-  ngOnInit() {
-  }
+
+    @Select(state => state.chat.chats)
+    chats$;
+
+    get me() {
+        return this.store.snapshot().auth.profile.sub;
+    }
+
+    ngOnInit() {
+
+    }
 
 }
