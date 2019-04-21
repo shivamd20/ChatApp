@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store';
 import { Logout, ClearState } from '../ngrxstate/actions/auth.action';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
+const path = window.location.hostname === 'localhost' ? '' : '/ChatApp';
 @Injectable()
 export class AuthService {
 
@@ -15,7 +16,7 @@ export class AuthService {
         clientID: CLIENT_ID,
         domain: 'shivamd20.auth0.com',
         responseType: 'token id_token',
-        redirectUri: `http://${window.location.host}/authorize`,
+        redirectUri: `${window.location.protocol}//${window.location.host}${path}/authorize`,
         scope: 'openid profile'
     });
 
