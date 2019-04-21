@@ -1,3 +1,19 @@
-<p>
-  chat works!
-</p>
+<ul class="chat">
+
+
+  <li *ngFor="let chat  of chats$ | async" [ngClass]="{
+    'chat__bubble': true,
+    'chat__bubble--rcvd': !(chat?.senderDetail?.user_id === me),
+    'chat__bubble--sent': (chat?.senderDetail?.user_id === me),
+    'chat__bubble--stop': true
+}">{{chat.msg}}
+    <img mat-avatar src="{{chat?.senderDetail?.profile_pic}}" alt="Avatar"
+      [ngClass]="{'left': !(chat?.senderDetail?.user_id === me), 'right': chat?.senderDetail?.user_id === me, 'avtar': true}"
+      (click)=" time.hidden = true ">
+    <br>
+    <span hidden #time
+      [ngClass]="{'time': true, left: !(chat?.senderDetail?.user_id === me), right : chat?.senderDetail?.user_id === me}">
+      {{chat?.datetime | date}} </span>
+  </li>
+
+</ul>
