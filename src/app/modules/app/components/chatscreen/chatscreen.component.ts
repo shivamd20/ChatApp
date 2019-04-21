@@ -6,7 +6,7 @@ import { SendMessage } from 'src/app/modules/ngrxstate/actions/chat.action';
 @Component({
     selector: 'app-chatscreen',
     templateUrl: './chatscreen.component.html',
-    styleUrls: ['./chatscreen.component.css']
+    styleUrls: ['./chatscreen.component.scss']
 })
 export class ChatscreenComponent implements OnInit {
 

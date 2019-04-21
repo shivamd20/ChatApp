@@ -5,6 +5,7 @@ import { AuthenticateComponent } from '../app/components/authenticate/authentica
 import { TempComponent } from '../app/components/temp/temp.component';
 import { ContactsComponent } from '../app/components/contacts/contacts.component';
 import { ChatscreenComponent } from '../app/components/chatscreen/chatscreen.component';
+import { ChatComponent } from '../app/components/chat/chat.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'contacts',
         component: ContactsComponent
+    },
+    {
+        path: 'chat',
+        component: ChatComponent
     },
     {
         path: '**',

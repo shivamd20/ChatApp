@@ -6,7 +6,7 @@ import { Navigate } from '@ngxs/router-plugin';
 @Component({
     selector: 'app-authenticate',
     templateUrl: './authenticate.component.html',
-    styleUrls: ['./authenticate.component.css']
+    styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
 

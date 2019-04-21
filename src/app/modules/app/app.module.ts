@@ -13,6 +13,7 @@ import { UserService } from '../graphql/services/user.service';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { ChatscreenComponent } from './components/chatscreen/chatscreen.component';
 import { ChatscreencontainerComponent } from './components/chatscreencontainer/chatscreencontainer.component';
+import { ChatComponent } from './components/chat/chat.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -21,7 +22,8 @@ import { ChatscreencontainerComponent } from './components/chatscreencontainer/c
         TempComponent,
         ContactsComponent,
         ChatscreenComponent,
-        ChatscreencontainerComponent
+        ChatscreencontainerComponent,
+        ChatComponent
     ],
     imports: [
         BrowserModule,

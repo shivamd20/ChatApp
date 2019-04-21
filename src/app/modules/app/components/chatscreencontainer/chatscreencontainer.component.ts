@@ -5,7 +5,7 @@ import { ChatService } from 'src/app/modules/graphql/services/chat.service';
 @Component({
     selector: 'app-chatscreencontainer',
     templateUrl: './chatscreencontainer.component.html',
-    styleUrls: ['./chatscreencontainer.component.css']
+    styleUrls: ['./chatscreencontainer.component.scss']
 })
 export class ChatscreencontainerComponent implements OnInit {
 
