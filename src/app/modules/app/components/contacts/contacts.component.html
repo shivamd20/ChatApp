@@ -3,8 +3,6 @@
   <mat-list-item *ngFor="let contact of contacts$ | async" (click)="onClick(contact)"
     [ngClass]="{'selected': (selectedContact$ | async).user_id  === contact.user_id  }">
     <img alt="photo" mat-list-avatar src="{{(contact)?.profile_pic}}" class="left" *ngIf="contact?.profile_pic" />
-    <button mat-flat-button>
-      <span mat-line>{{contact.name}}</span>
-    </button>
+    <span mat-line>{{contact.name}}</span>
   </mat-list-item>
 </mat-list>

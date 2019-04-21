@@ -5,13 +5,19 @@ mat-list {
   font-size: 0%;
 }
 
+mat-list-item :hover {
+  font-weight: bold;
+}
+
+
 button {
   font-style: normal;
-  font-size: 1em;
+  font-size: small;
   text-align: left;
   width: 100%;
 }
 
 .selected {
-  background-color: beige;
+  background-color: #3f51b5;
+  color: white;
 }

@@ -15,7 +15,7 @@ export class AuthService {
         clientID: CLIENT_ID,
         domain: 'shivamd20.auth0.com',
         responseType: 'token id_token',
-        redirectUri: 'http://localhost:4200/authorize',
+        redirectUri: `http://${window.location.host}/authorize`,
         scope: 'openid profile'
     });
 
@@ -52,9 +52,10 @@ export class AuthService {
         */
 
     logout() {
+
         this.store.dispatch(new ClearState());
         this.auth0.logout({
-            returnTo: 'http://localhost:4200',
+            returnTo: `http://${window.location.host}/`,
             clientID: CLIENT_ID
         });
     }
