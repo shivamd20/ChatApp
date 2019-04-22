@@ -26,22 +26,22 @@ export class ChatService implements OnDestroy {
         if (!this.chats$ || this.chats$.closed) {
             this.chats$ = this.apollo.subscribe({
                 query: gql`subscription ($user_id: String) {
-                chat(order_by: {datetime: asc}, where: {_or: [{sender: {_eq: $user_id}},{receiver: {_eq: $user_id}} ]}) {
-                  id
-                  msg
-                  datetime
-                  senderDetail {
-                    profile_pic
-                    user_id
-                    name
+                    chat(order_by: {datetime: asc}, where: {receiver: {_eq: $user_id}}) {
+                      id
+                      msg
+                      datetime
+                      senderDetail {
+                        profile_pic
+                        user_id
+                        name
+                      }
+                      receiverDetail {
+                        profile_pic
+                        user_id
+                        name
+                      }
+                    }
                   }
-                  receiverDetail {
-                    profile_pic
-                    user_id
-                    name
-                  }
-                }
-              }
               `,
                 variables: {
                     'user_id': this.store.snapshot().auth.profile.sub
@@ -60,6 +60,21 @@ export class ChatService implements OnDestroy {
             mutation: gql`mutation ($sender: String, $receiver: String, $msg: String) {
                 insert_chat(objects: {msg: $msg, sender: $sender, receiver: $receiver}) {
                   affected_rows
+                  returning {
+                    datetime
+                    id
+                    msg
+                    receiverDetail {
+                      name
+                      profile_pic
+                      user_id
+                    }
+                    senderDetail {
+                      name
+                      profile_pic
+                      user_id
+                    }
+                  }
                 }
               }
     `,

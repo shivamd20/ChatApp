@@ -3,7 +3,11 @@
     <button class=" example-spacer" mat-button (click)="contacts.toggle()" *ngIf="profile">
       <mat-icon mat-list-icon>contacts</mat-icon>
     </button>
-    <span *ngIf="profile">{{ (selectedContact$ | async).name }}</span>
+
+    <img alt="photo" style="margin-left: 10px" src="{{ (selectedContact$ | async).profile_pic }}" mat-card-avatar
+      *ngIf="profile" />
+
+    <span *ngIf="profile" class="space">{{  (selectedContact$ | async).name }}</span>
     <span *ngIf="!profile"> Ramesh's App </span>
 
 

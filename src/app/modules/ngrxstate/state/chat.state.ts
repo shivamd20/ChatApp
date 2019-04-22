@@ -33,7 +33,7 @@ export class ChatState {
     saveChats(ctx: StateContext<ChatStateModel>, action: SaveChats) {
         const currentState = ctx.getState();
         const nextState = produce(currentState, (draftState => {
-            draftState.chats = action.payload;
+            draftState.chats = [...draftState.chats, ...action.payload];
         }));
         ctx.setState(nextState);
     }
@@ -50,8 +50,14 @@ export class ChatState {
 
 
     @Action(SendMessage)
-    SendMessage(ctx: StateContext<ChatStateModel>, action: SendMessage) {
+    async SendMessage(ctx: StateContext<ChatStateModel>, action: SendMessage) {
         const currentState = ctx.getState();
-        this.chatService.sendMessage(action.payload, currentState.selectedContact).toPromise();
+        const result: any = await this.chatService.sendMessage(action.payload, currentState.selectedContact).toPromise();
+        console.log(result.data.insert_chat.returning[0]);
+        const nextState = produce(currentState, (draftState => {
+            draftState.chats.push(result.data.insert_chat.returning[0]);
+        }));
+
+        ctx.setState(nextState);
     }
 }

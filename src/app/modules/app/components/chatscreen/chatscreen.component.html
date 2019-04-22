@@ -1,11 +1,12 @@
 <div class="header">
-  <app-chatscreencontainer></app-chatscreencontainer>
+  <app-chat></app-chat>
 
   <div class="header-content">
     <mat-form-field class="input">
-      <textarea matInput placeholder="Write your message here" color="primery" #textarea></textarea>
+      <input matInput placeholder="Write your message here" color="primery" #textarea />
     </mat-form-field>
-    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea)">
+    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea)"
+      [disabled]="!textarea.value">
       <mat-icon>send</mat-icon>
     </button>
   </div>

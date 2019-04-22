@@ -5,7 +5,7 @@ import { AuthenticateComponent } from '../app/components/authenticate/authentica
 import { TempComponent } from '../app/components/temp/temp.component';
 import { ContactsComponent } from '../app/components/contacts/contacts.component';
 import { ChatscreenComponent } from '../app/components/chatscreen/chatscreen.component';
-import { ChatComponent } from '../app/components/chat/chat.component';
+import { ChatscreencontainerComponent } from '../app/components/chatscreencontainer/chatscreencontainer.component';
 
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
     },
     {
         path: 'chat',
-        component: ChatComponent
+        component: ChatscreencontainerComponent
     },
     {
         path: '**',
