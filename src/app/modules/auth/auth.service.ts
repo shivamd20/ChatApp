@@ -53,7 +53,7 @@ export class AuthService {
 
     logout() {
         this.auth0.logout({
-            returnTo: `http://${window.location.host}/`,
+            returnTo: `http://${window.location.host}/ChatApp`,
             clientID: CLIENT_ID
         });
     }
