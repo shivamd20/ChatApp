@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Actions, Select } from '@ngxs/store';
+import { Store, Actions, Select, ofActionSuccessful } from '@ngxs/store';
 import { Logout, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { DeleteAllChats } from 'src/app/modules/ngrxstate/actions/chat.action';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-profile',
@@ -14,7 +16,7 @@ export class ProfileComponent implements OnInit {
     profile$: any;
 
 
-    constructor(private store: Store, private actions: Actions) { }
+    constructor(private store: Store, private actions$: Actions, private snackBar: MatSnackBar) { }
 
     logout() {
         this.store.dispatch(new Logout());
@@ -29,6 +31,13 @@ export class ProfileComponent implements OnInit {
     }
 
     deleteAllChats() {
-        console.log(prompt('Are you sure? This action can not be undone..'));
+        if (confirm('Are you sure? This action can not be undone..')) {
+            this.store.dispatch(new DeleteAllChats());
+            this.actions$
+                .pipe(ofActionSuccessful(DeleteAllChats))
+                .subscribe(() => this.snackBar.open('Chats Deleted Successfully!!!', undefined, {
+                    duration: 5000
+                }));
+        }
     }
 }

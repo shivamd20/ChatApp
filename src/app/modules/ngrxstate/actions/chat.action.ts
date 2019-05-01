@@ -24,3 +24,11 @@ export class SendMessage {
     public static readonly type = '[Chat] SendMessage';
     constructor(public payload: string) { }
 }
+
+export class DeleteAllChats {
+    public static readonly type = '[Chat] DeleteAllChats';
+}
+export class DeleteReceivedChats {
+    public static readonly type = '[Chat] DeleteReceivedChats';
+    constructor(public payload: number[]) { }
+}

@@ -2,7 +2,7 @@ import { StateContext, Action, State } from '@ngxs/store';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 import { ChatStateModel } from '../models/chat.model';
-import { GetContacts, SaveChats, SelectContact, SendMessage } from '../actions/chat.action';
+import { GetContacts, SaveChats, SelectContact, SendMessage, DeleteAllChats, DeleteReceivedChats } from '../actions/chat.action';
 import { ChatService } from '../../graphql/services/chat.service';
 
 @State<ChatStateModel>({
@@ -45,6 +45,8 @@ export class ChatState {
             })];
         }));
         ctx.setState(nextState);
+        const chats: number[] = action.payload.map(x => x.id);
+        ctx.dispatch(new DeleteReceivedChats(chats));
     }
 
 
@@ -57,6 +59,33 @@ export class ChatState {
         ctx.setState(nextState);
     }
 
+
+
+    @Action(DeleteAllChats)
+    async deleteAllChats(ctx: StateContext<ChatStateModel>, action: DeleteAllChats) {
+        try {
+            const result = await this.chatService.deleteAllChats().toPromise();
+            const currentState = ctx.getState();
+            const nextState = produce(currentState, (draftState => {
+                draftState.chats = [];
+            }));
+            ctx.setState(nextState);
+        } catch (e) {
+            console.log(e);
+
+        }
+
+    }
+
+    @Action(DeleteReceivedChats)
+    async deleteReceivedChats(ctx: StateContext<ChatStateModel>, action: DeleteReceivedChats) {
+        try {
+            const result = await this.chatService.deleteReceivedChats(action.payload).toPromise();
+            console.log(result);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     @Action(SendMessage)
     async SendMessage(ctx: StateContext<ChatStateModel>, action: SendMessage) {

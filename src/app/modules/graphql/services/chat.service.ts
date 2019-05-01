@@ -86,4 +86,34 @@ export class ChatService implements OnDestroy {
         },
         );
     }
+
+    public deleteAllChats(): Observable<Object> {
+        return this.apollo.mutate({
+            mutation: gql`mutation($user_id: String) {
+                delete_chat(where: {receiver: {_eq: $user_id}}) {
+                  affected_rows
+                }
+              }
+    `,
+            variables: {
+                user_id: this.store.snapshot().auth.profile.sub
+            }
+        },
+        );
+    }
+
+    public deleteReceivedChats(deleteChats): Observable<Object> {
+        return this.apollo.mutate({
+            mutation: gql`mutation ($chat_ids: [Int]) {
+                delete_chat(where: {id: {_in: $chat_ids}}) {
+                  affected_rows
+                }
+              }
+    `,
+            variables: {
+                chat_ids: deleteChats
+            }
+        },
+        );
+    }
 }
