@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     @Select(state => (state.chat.selectedContact))
     selectedContact$;
 
-    constructor(private authService: AuthService) {
+    constructor(authService: AuthService) {
         authService.renewTokens();
 
     }
