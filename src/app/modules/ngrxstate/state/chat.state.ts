@@ -35,7 +35,14 @@ export class ChatState {
     saveChats(ctx: StateContext<ChatStateModel>, action: SaveChats) {
         const currentState = ctx.getState();
         const nextState = produce(currentState, (draftState => {
-            draftState.chats = [...action.payload];
+            draftState.chats = [...draftState.chats, ...action.payload.filter(x => {
+
+                for (let i = 0; i < draftState.chats.length; i++) {
+                    if (x.id === draftState.chats[i].id) { return false; }
+                }
+                return true;
+
+            })];
         }));
         ctx.setState(nextState);
     }
