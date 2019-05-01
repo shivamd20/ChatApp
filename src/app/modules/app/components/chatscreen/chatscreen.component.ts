@@ -12,7 +12,6 @@ export class ChatscreenComponent implements OnInit {
 
     constructor(private userService: UserService, private store: Store) { }
     ngOnInit() {
-        this.userService.getContacts();
     }
 
     send(textarea) {

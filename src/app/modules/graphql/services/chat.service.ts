@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Store } from '@ngxs/store';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { SaveChats } from '../../ngrxstate/actions/chat.action';
 
@@ -11,7 +11,7 @@ import { SaveChats } from '../../ngrxstate/actions/chat.action';
     providedIn: 'root'
 })
 export class ChatService implements OnDestroy {
-    chats$: Subscription;
+    private chats$: Subscription;
 
 
     ngOnDestroy(): void {
@@ -47,7 +47,7 @@ export class ChatService implements OnDestroy {
                     'user_id': this.store.snapshot().auth.profile.sub
                 }
             },
-            ).pipe(map(val => val.data.chat)).subscribe(data => {
+            ).pipe(retry(10), map(val => val.data.chat)).subscribe(data => {
                 this.store.dispatch(new SaveChats(data));
             });
         }
@@ -84,7 +84,7 @@ export class ChatService implements OnDestroy {
                 'msg': msg
             }
         },
-        );
+        ).pipe(retry(10));
     }
 
     public deleteAllChats(): Observable<Object> {
@@ -99,7 +99,7 @@ export class ChatService implements OnDestroy {
                 user_id: this.store.snapshot().auth.profile.sub
             }
         },
-        );
+        ).pipe(retry(10));
     }
 
     public deleteReceivedChats(deleteChats): Observable<Object> {
@@ -114,6 +114,6 @@ export class ChatService implements OnDestroy {
                 chat_ids: deleteChats
             }
         },
-        );
+        ).pipe(retry(10));
     }
 }

@@ -1,5 +1,6 @@
-export class GetContacts {
-    public static readonly type = '[Chat] GetContacts';
+export class SaveContacts {
+    public static readonly type = '[Chat] SaveContacts';
+    constructor(public payload: []) { }
 }
 export class SaveChats {
     public static readonly type = '[Chat] SaveChats';

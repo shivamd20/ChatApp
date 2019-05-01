@@ -37,6 +37,7 @@ export class AuthState {
             const profile = await this.authService.getProfile(state.accessToken);
             const nextState = produce(state, (draftState) => Object.assign(draftState, { profile }));
             ctx.setState(nextState);
+            ctx.dispatch(new SaveUserInDataBase());
         }
         catch (e) {
             console.log(GetProfile.type, e);
@@ -62,7 +63,7 @@ export class AuthState {
     }
 
     @Action(SaveUserInDataBase)
-    async saveUserInDataBase(ctx: StateContext<AuthStateModel>, action: ParseHash) {
-        await this.userService.saveUserInDatabase(ctx.getState()).toPromise();
+    async saveUserInDataBase(ctx: StateContext<AuthStateModel>, action: SaveUserInDataBase) {
+        await this.userService.saveUserInDatabase().toPromise();
     }
 }

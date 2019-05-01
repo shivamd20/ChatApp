@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { ApolloQueryResult } from 'apollo-client';
+import { SaveContacts } from '../../ngrxstate/actions/chat.action';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
+
+    private users$: Subscription;
     constructor(private apollo: Apollo, private store: Store) { }
 
-    public async getContacts() {
-        const result: ApolloQueryResult<any> = await this.apollo.query({
-            query: gql`{
+    public getContacts() {
+        if (!this.users$ || this.users$.closed) {
+
+            console.log("inside it");
+
+            this.users$ = this.apollo.subscribe({
+                query: gql`subscription{
                 user {
                   name
                   profile_pic
@@ -22,11 +30,12 @@ export class UserService {
                 }
               }
               `
-        }).toPromise();
-        return result.data.user;
+            }).pipe(retry(10)).subscribe(d => this.store.dispatch(new SaveContacts(d.data.user)), e => console.log(e)
+            );
+        }
     }
 
-    public saveUserInDatabase(state): Observable<Object> {
+    public saveUserInDatabase(): Observable<Object> {
         const { sub: userId, name, picture } = this.store.selectSnapshot(state => state.auth.profile);
         return this.apollo.mutate({
             mutation: gql`
@@ -51,6 +60,6 @@ export class UserService {
                 user_id: userId
             }
         },
-        );
+        ).pipe(retry(10));
     }
 }
