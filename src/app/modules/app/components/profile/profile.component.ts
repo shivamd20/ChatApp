@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Actions, ofActionCompleted, ofActionDispatched, Select } from '@ngxs/store';
-import { Logout, GetProfile, Login, ParseHash, SaveUserInDataBase } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Store, Actions, Select } from '@ngxs/store';
+import { Logout, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
 
 @Component({
     selector: 'app-profile',
@@ -26,5 +26,9 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit() {
 
+    }
+
+    deleteAllChats() {
+        console.log(prompt('Are you sure? This action can not be undone..'));
     }
 }

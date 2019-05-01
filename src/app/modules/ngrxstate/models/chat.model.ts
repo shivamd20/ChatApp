@@ -1,7 +1,7 @@
 export class ChatStateModel {
     users: Array<Object>;
     selectedContact?;
-    chats: Array<{
+    chats: {
         id;
         msg;
         datatime: Date;
@@ -10,5 +10,5 @@ export class ChatStateModel {
             name;
             profile_pic;
         };
-    }>;
+    }[];
 }

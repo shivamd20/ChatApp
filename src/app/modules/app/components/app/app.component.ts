@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
+import { AuthService } from 'src/app/modules/auth/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit {
     @Select(state => (state.chat.selectedContact))
     selectedContact$;
 
+    constructor(private authService: AuthService) {
+        authService.renewTokens();
+
+    }
     ngOnInit(): void {
 
     }

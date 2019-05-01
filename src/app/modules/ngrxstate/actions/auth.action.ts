@@ -3,14 +3,15 @@ export class Login {
     static readonly type = '[Auth] Login';
 }
 
+export class PersistAuthCreds {
+    static readonly type = '[Auth] PersistAuthCreds';
+    constructor(public payload) {
+
+    }
+}
 export class Logout {
     static readonly type = '[Auth] Logout';
 }
-
-export class ClearState {
-    static readonly type = '[Auth] Clear State';
-}
-
 
 export class GetProfile {
     static readonly type = '[Auth] GetProfile';

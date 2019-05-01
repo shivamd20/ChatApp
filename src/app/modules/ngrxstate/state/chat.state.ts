@@ -7,15 +7,17 @@ import { ChatService } from '../../graphql/services/chat.service';
 
 @State<ChatStateModel>({
     name: 'chat',
-    defaults: {
+    defaults: ChatState.defaultState
+})
+export class ChatState {
+
+    static defaultState: ChatStateModel = {
         chats: [],
         users: [],
         selectedContact: {
             user_id: 'ramesh1'
         }
-    }
-})
-export class ChatState {
+    };
 
     constructor(private userService: UserService, private chatService: ChatService) { }
 
@@ -33,7 +35,7 @@ export class ChatState {
     saveChats(ctx: StateContext<ChatStateModel>, action: SaveChats) {
         const currentState = ctx.getState();
         const nextState = produce(currentState, (draftState => {
-            draftState.chats = [...draftState.chats, ...action.payload];
+            draftState.chats = [...action.payload];
         }));
         ctx.setState(nextState);
     }

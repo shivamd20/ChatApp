@@ -16,6 +16,12 @@
       LOGOUT
     </button>
   </mat-card-actions>
+  <mat-card-actions *ngIf="profile;" style="margin:auto; text-align: center">
+    <button mat-stroked-button (click)="deleteAllChats()" color="warn">
+      <mat-icon>logout</mat-icon>
+      DELETE ALL CHATS
+    </button>
+  </mat-card-actions>
 
   <mat-card-actions *ngIf="!profile;" style="margin:auto; text-align: center">
     <button mat-stroked-button (click)="login()" color="primary">

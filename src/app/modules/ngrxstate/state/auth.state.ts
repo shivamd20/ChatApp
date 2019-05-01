@@ -1,14 +1,21 @@
 import { AuthStateModel } from '../models/auth.model';
 import { Selector, StateContext, Action, State } from '@ngxs/store';
 import { AuthService } from '../../auth/auth.service';
-import { Login, Logout, ClearState, GetProfile, ParseHash, SaveUserInDataBase } from '../actions/auth.action';
+import { Login, Logout, GetProfile, ParseHash, SaveUserInDataBase, PersistAuthCreds } from '../actions/auth.action';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 
 @State<AuthStateModel>({
-    name: 'auth'
+    name: 'auth',
+    defaults: AuthState.defaultState
 })
 export class AuthState {
+    static defaultState: AuthStateModel = {
+        accessToken: undefined,
+        expiresAt: undefined,
+        idToken: undefined,
+        profile: undefined
+    };
 
     constructor(private authService: AuthService, private userService: UserService) { }
 
@@ -21,17 +28,6 @@ export class AuthState {
     logout(ctx: StateContext<AuthStateModel>) {
 
         this.authService.logout();
-        ctx.dispatch(ClearState);
-    }
-
-    @Action(ClearState)
-    clearState(ctx: StateContext<AuthStateModel>) {
-        ctx.setState({
-            accessToken: undefined,
-            expiresAt: undefined,
-            idToken: undefined,
-            profile: undefined
-        });
     }
 
     @Action(GetProfile)
@@ -47,9 +43,9 @@ export class AuthState {
         }
     }
 
-    @Action(ParseHash)
-    async parseHash(ctx: StateContext<AuthStateModel>, action: ParseHash) {
-        const authResult = await this.authService.handleAuthentication();
+    @Action(PersistAuthCreds)
+    persistAuthCredentials(ctx: StateContext<AuthStateModel>, action: PersistAuthCreds) {
+        const authResult = action.payload;
         const expiresAt = (authResult.expiresIn * 1000) + Date.now();
         const state = ctx.getState();
         const nextState = produce(state, (draftState) => Object.assign(draftState, {
@@ -57,6 +53,12 @@ export class AuthState {
             ...authResult
         }));
         ctx.setState(nextState);
+    }
+
+    @Action(ParseHash)
+    async parseHash(ctx: StateContext<AuthStateModel>, action: ParseHash) {
+        const authResult = await this.authService.handleAuthentication();
+        ctx.dispatch(new PersistAuthCreds(authResult));
     }
 
     @Action(SaveUserInDataBase)

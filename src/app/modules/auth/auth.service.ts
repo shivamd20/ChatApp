@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { Logout, ClearState } from '../ngrxstate/actions/auth.action';
+import { Logout, PersistAuthCreds, Login } from '../ngrxstate/actions/auth.action';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 const path = window.location.hostname === 'localhost' ? '' : '/ChatApp';
@@ -38,23 +38,20 @@ export class AuthService {
     }
 
 
-    /*TODO
-        public renewTokens(): void {
-            this.auth0.checkSession({}, (err, authResult) => {
-                if (authResult && authResult.accessToken && authResult.idToken) {
-                    //TODO this.localLogin(authResult);
-                } else if (err) {
-                    alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
-                    console.log(JSON.stringify(err, null, 4));
-                    this.store.dispatch(new Logout());
-                }
-            });
-        }
-        */
+
+    public renewTokens(): void {
+        this.auth0.checkSession({}, (err, authResult) => {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                this.store.dispatch(new PersistAuthCreds(authResult));
+            } else if (err) {
+                console.log(JSON.stringify(err, null, 4));
+                this.store.dispatch(new Login());
+            }
+        });
+    }
+
 
     logout() {
-
-        this.store.dispatch(new ClearState());
         this.auth0.logout({
             returnTo: `http://${window.location.host}/`,
             clientID: CLIENT_ID

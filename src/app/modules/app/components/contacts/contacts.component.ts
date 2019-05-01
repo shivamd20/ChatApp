@@ -16,7 +16,17 @@ export interface Section {
 })
 export class ContactsComponent implements OnInit {
 
-    @Select(state => state.chat.users)
+    @Select(state => {
+
+        try {
+            return state.chat.users
+        } catch (e) {
+            console.log(e);
+
+        }
+    }
+
+    )
     contacts$: Observable<any>;
 
     @Select(state => (state.chat.selectedContact))
