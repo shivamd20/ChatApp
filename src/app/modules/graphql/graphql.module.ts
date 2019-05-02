@@ -36,7 +36,7 @@ import { split } from 'apollo-link';
                                 const authToken = (JSON.parse(localStorage.getItem('auth')) || {}).idToken;
                                 return {
                                     'Authorization': 'Bearer ' + authToken,
-                                }
+                                };
                             }
                         }
                     })

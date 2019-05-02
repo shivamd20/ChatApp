@@ -19,7 +19,7 @@ export class ContactsComponent implements OnInit {
     @Select(state => {
 
         try {
-            return state.chat.users
+            return state.chat.users;
         } catch (e) {
             console.log(e);
 

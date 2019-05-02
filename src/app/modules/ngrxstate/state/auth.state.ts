@@ -38,8 +38,7 @@ export class AuthState {
             const nextState = produce(state, (draftState) => Object.assign(draftState, { profile }));
             ctx.setState(nextState);
             ctx.dispatch(new SaveUserInDataBase());
-        }
-        catch (e) {
+        } catch (e) {
             console.log(GetProfile.type, e);
         }
     }

@@ -18,7 +18,6 @@ export class UserService {
     public getContacts() {
         if (!this.users$ || this.users$.closed) {
 
-            console.log("inside it");
 
             this.users$ = this.apollo.subscribe({
                 query: gql`subscription{
