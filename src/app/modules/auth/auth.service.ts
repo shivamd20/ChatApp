@@ -49,15 +49,12 @@ export class AuthService {
             }
         });
     }
-
-
     logout() {
         this.auth0.logout({
             returnTo: `http://${window.location.host}/ChatApp`,
             clientID: CLIENT_ID
         });
     }
-
     getProfile(accessToken) {
         return new Promise((resolve, reject) => {
 
@@ -67,8 +64,6 @@ export class AuthService {
                 } else { resolve(profile); }
             });
 
-        })
-
+        });
     }
-
 }
