@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "9"
+env:
+  global:
+    - GITHUB_ORG="https://GH_TOKEN@github.com/book-monkey2-build"
+    - GITHUB_NAME="The Buildbot"
+    - GITHUB_EMAIL="buildbot@angular2buch.de"
 dist: trusty
 sudo: required
 branches:

@@ -1,4 +1,4 @@
-import { StateContext, Action, State } from '@ngxs/store';
+import { StateContext, Action, State, NgxsOnInit } from '@ngxs/store';
 import { produce } from 'immer';
 import { UserService } from '../../graphql/services/user.service';
 import { ChatStateModel } from '../models/chat.model';
@@ -9,7 +9,10 @@ import { ChatService } from '../../graphql/services/chat.service';
     name: 'chat',
     defaults: ChatState.defaultState
 })
-export class ChatState {
+export class ChatState implements NgxsOnInit {
+    ngxsOnInit(ctx?: StateContext<any>) {
+        this.chatService.getChats();
+    }
 
     static defaultState: ChatStateModel = {
         chats: [],
