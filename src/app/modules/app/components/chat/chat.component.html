@@ -1,6 +1,4 @@
 <ul class="chat">
-
-
   <li *ngFor="let chat  of chats$ | async" [ngClass]="{
     'chat__bubble': true,
     'chat__bubble--rcvd': !(chat?.senderDetail?.user_id === me),
@@ -11,9 +9,9 @@
       [ngClass]="{'left': !(chat?.senderDetail?.user_id === me), 'right': chat?.senderDetail?.user_id === me, 'avtar': true}"
       (click)=" time.hidden = true ">
     <br>
-    <span hidden #time
+    <span #time
       [ngClass]="{'time': true, left: !(chat?.senderDetail?.user_id === me), right : chat?.senderDetail?.user_id === me}">
-      {{chat?.datetime | date}} </span>
+      {{chat?.datetime | amTimeAgo}} </span>
   </li>
 
 </ul>

@@ -14,6 +14,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { ChatscreenComponent } from './components/chatscreen/chatscreen.component';
 import { ChatscreencontainerComponent } from './components/chatscreencontainer/chatscreencontainer.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MomentModule } from 'ngx-moment';
 @NgModule({
     declarations: [
         AppComponent,
@@ -31,7 +32,8 @@ import { ChatComponent } from './components/chat/chat.component';
         MaterialModule,
         StateModule,
         GraphQLModule,
-        HttpClientModule
+        HttpClientModule,
+        MomentModule
     ]
     ,
     providers: [UserService],
