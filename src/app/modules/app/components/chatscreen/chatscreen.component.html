@@ -7,9 +7,8 @@
         <input matInput placeholder="Write your message here" color="primery" #textarea />
       </form>
     </mat-form-field>
-    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea);"
-      [disabled]="!textarea.value">
-      <mat-icon>send</mat-icon>
-    </button>
+    <span title="send" class="sendbtn" (click)="send(textarea);" mat-flat-button>
+      <mat-icon color="accent">send</mat-icon>
+    </span>
   </div>
 </div>
