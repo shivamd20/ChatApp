@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { Store } from '@ngxs/store';
-import { Logout, PersistAuthCreds, Login } from '../ngrxstate/actions/auth.action';
+import { PersistAuthCreds, Login } from '../ngrxstate/actions/auth.action';
 
 const CLIENT_ID = 'S9AUw2i7f9n6VfpO8MnuWn3tlzwVSvKu';
 const path = window.location.hostname === 'localhost' ? '' : '/ChatApp';
@@ -52,7 +52,7 @@ export class AuthService {
 
     logout() {
         this.auth0.logout({
-            returnTo: `http://${window.location.host}/ChatApp`,
+            returnTo: `http://${window.location.host}/${path}`,
             clientID: CLIENT_ID
         });
     }
