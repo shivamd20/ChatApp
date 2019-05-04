@@ -1,16 +1,19 @@
 
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    path: import('@angular/router').ActivatedRouteSnapshot[];
-    route: import('@angular/router').ActivatedRouteSnapshot;
     constructor(private store: Store) { }
 
     canActivate() {
-        return this.store.select(state => state.auth.idToken);
+        return this.isAuthenticated();
+    }
+
+    public isAuthenticated(): boolean {
+        const { accessToken, expiresAt } = this.store.snapshot().auth;
+        return accessToken && Date.now() < expiresAt;
     }
 
 }

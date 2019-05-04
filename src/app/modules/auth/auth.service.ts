@@ -24,11 +24,6 @@ export class AuthService {
         this.auth0.authorize();
     }
 
-    public isAuthenticated(): boolean {
-        const { accessToken, expiresAt } = this.store.snapshot().auth;
-        return accessToken && Date.now() < expiresAt;
-    }
-
     public handleAuthentication(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.auth0.parseHash((err, authResult) => {

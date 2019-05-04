@@ -6,6 +6,7 @@ import { TempComponent } from '../app/components/temp/temp.component';
 import { ContactsComponent } from '../app/components/contacts/contacts.component';
 import { ChatscreenComponent } from '../app/components/chatscreen/chatscreen.component';
 import { ChatscreencontainerComponent } from '../app/components/chatscreencontainer/chatscreencontainer.component';
+import { AuthGuard } from '../auth/authguard.service';
 
 
 const routes: Routes = [
@@ -19,15 +20,17 @@ const routes: Routes = [
     },
     {
         path: 'contacts',
-        component: ContactsComponent
+        component: ContactsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'chat',
-        component: ChatscreencontainerComponent
+        component: ChatscreencontainerComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: '**',
-        component: ChatscreenComponent
+        component: ChatscreenComponent,
     },
 
 ];
