@@ -1,4 +1,4 @@
-<mat-list style="max-width: 50vw;">
+<mat-list style="max-width: 60vw;">
   <h2 mat-subheader>Contacts</h2>
   <mat-list-item *ngFor="let contact of contacts$ | async" (click)="onClick(contact)"
     [ngClass]="{'selected': (selectedContact$ | async).user_id  === contact.user_id  }">
