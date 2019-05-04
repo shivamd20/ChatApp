@@ -15,6 +15,7 @@ import { ChatscreenComponent } from './components/chatscreen/chatscreen.componen
 import { ChatscreencontainerComponent } from './components/chatscreencontainer/chatscreencontainer.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MomentModule } from 'ngx-moment';
+import { LandingComponent } from './components/landing/landing.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -24,7 +25,8 @@ import { MomentModule } from 'ngx-moment';
         ContactsComponent,
         ChatscreenComponent,
         ChatscreencontainerComponent,
-        ChatComponent
+        ChatComponent,
+        LandingComponent
     ],
     imports: [
         BrowserModule,

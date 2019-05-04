@@ -46,7 +46,8 @@ export class AuthState {
     @Action(PersistAuthCreds)
     persistAuthCredentials(ctx: StateContext<AuthStateModel>, action: PersistAuthCreds) {
         const authResult = action.payload;
-        const expiresAt = (authResult.expiresIn * 1000) + Date.now();
+        const expiresAt = (a
+            uthResult.expiresIn * 1000) + Date.now();
         const state = ctx.getState();
         const nextState = produce(state, (draftState) => Object.assign(draftState, {
             expiresAt: expiresAt,
