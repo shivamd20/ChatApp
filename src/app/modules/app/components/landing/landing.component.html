@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]" class="trans" class="appbar">
+<mat-toolbar color="primary" *ngFor="let profile of [profile$ | async]" class="appbar">
   <mat-toolbar-row>
     <button class=" example-spacer" mat-button (click)="contacts.toggle(); drawer2.close()" *ngIf="profile">
       <mat-icon mat-list-icon>contacts</mat-icon>
