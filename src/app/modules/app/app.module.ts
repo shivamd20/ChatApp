@@ -17,7 +17,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MomentModule } from 'ngx-moment';
 import { LandingComponent } from './components/landing/landing.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { environment } from '../../../environments/environment';
 @NgModule({
     declarations: [
         AppComponent,
