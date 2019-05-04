@@ -16,7 +16,8 @@ const routes: Routes = [
     },
     {
         path: 'temp',
-        component: TempComponent
+        component: TempComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'contacts',
