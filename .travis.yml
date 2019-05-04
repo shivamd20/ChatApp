@@ -17,7 +17,7 @@ before_script:
 script:
 - ng lint
 - npm run bp
-- cp dist/ChatApp/index.html 404.html
+- cp dist/ChatApp/index.html dist/ChatApp/404.html
 deploy:
   provider: pages
   skip_cleanup: true
