@@ -12,11 +12,11 @@
   position: absolute;
   bottom: 0;
   width: 80%;
-  min-width: 300px;
   background-color: white;
   border-radius: 10px;
   left: 10%;
-  min-width: 100px;
+  min-width: 50px;
+  max-width: 50vw;
 }
 
 .header,
@@ -28,7 +28,7 @@
 }
 
 .sendbtn {
-  float: right;
+  float: end;
   position: absolute;
   padding: 1%;
   margin-left: 1%;

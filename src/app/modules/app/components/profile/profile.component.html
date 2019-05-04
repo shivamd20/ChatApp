@@ -1,4 +1,4 @@
-<mat-card *ngFor="let profile of [profile$ | async]" style="height: 100%;">
+<mat-card *ngFor="let profile of [profile$ | async]" style="height: 100%; max-width: 40vw;">
   <mat-card-header *ngIf="profile;">
     <img mat-card-avatar class="example-header-image" [src]="profile?.picture" />
     <mat-card-title>{{ profile?.given_name }}</mat-card-title>
