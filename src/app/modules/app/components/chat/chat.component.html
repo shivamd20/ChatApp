@@ -1,4 +1,4 @@
-<ul class="chat">
+<ul class="chat" #scrollMe>
   <li *ngFor="let chat  of chats$ | async" [ngClass]="{
     'chat__bubble': true,
     'chat__bubble--rcvd': !(chat?.senderDetail?.user_id === me),

@@ -3,9 +3,11 @@
 
   <div class="header-content">
     <mat-form-field class="input">
-      <input matInput placeholder="Write your message here" color="primery" #textarea />
+      <form (submit)="send(textarea)">
+        <input matInput placeholder="Write your message here" color="primery" #textarea />
+      </form>
     </mat-form-field>
-    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea)"
+    <button mat-stroked-button color="warn" title="send" class="sendbtn" (click)="send(textarea);"
       [disabled]="!textarea.value">
       <mat-icon>send</mat-icon>
     </button>

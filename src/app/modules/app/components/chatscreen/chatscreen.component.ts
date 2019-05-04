@@ -15,8 +15,13 @@ export class ChatscreenComponent implements OnInit {
     }
 
     send(textarea) {
-        this.store.dispatch(new SendMessage(textarea.value));
-        textarea.value = '';
+
+        if (textarea.value) {
+            this.store.dispatch(new SendMessage(textarea.value));
+            textarea.value = '';
+        }
+
+        return false;
     }
 
 }

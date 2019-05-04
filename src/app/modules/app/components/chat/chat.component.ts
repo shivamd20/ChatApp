@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 
 @Component({
@@ -6,7 +6,10 @@ import { Select, Store } from '@ngxs/store';
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+
+
+    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
     @Select((state) => {
         try {
@@ -40,6 +43,17 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.scrollToBottom();
+    }
+
+    ngAfterViewChecked(): void {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch (err) { }
     }
 
 }
