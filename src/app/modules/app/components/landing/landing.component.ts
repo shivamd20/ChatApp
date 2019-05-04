@@ -17,8 +17,7 @@ export class LandingComponent implements OnInit {
     selectedContact$;
 
     constructor(authService: AuthService) {
-        authService.renewTokens();
-
+        //  authService.renewTokens();
     }
     ngOnInit(): void {
 

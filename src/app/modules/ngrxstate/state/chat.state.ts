@@ -16,7 +16,7 @@ export class ChatState implements NgxsOnInit {
         chats: [],
         users: [],
         selectedContact: {
-            user_id: 'ramesh1'
+            user_id: 'google-oauth2|105340382558189294995'
         }
     };
     ngxsOnInit(ctx?: StateContext<any>) {
