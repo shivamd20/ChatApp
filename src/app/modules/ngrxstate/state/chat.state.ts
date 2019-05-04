@@ -1,6 +1,5 @@
 import { StateContext, Action, State, NgxsOnInit } from '@ngxs/store';
 import { produce } from 'immer';
-import { UserService } from '../../graphql/services/user.service';
 import { ChatStateModel } from '../models/chat.model';
 import { SaveChats, SelectContact, SendMessage, DeleteAllChats, DeleteReceivedChats, SaveContacts } from '../actions/chat.action';
 import { ChatService } from '../../graphql/services/chat.service';
@@ -10,9 +9,8 @@ import { ChatService } from '../../graphql/services/chat.service';
     defaults: ChatState.defaultState
 })
 export class ChatState implements NgxsOnInit {
-    ngxsOnInit(ctx?: StateContext<any>) {
-        this.chatService.getChats();
-    }
+
+    constructor(private chatService: ChatService) { }
 
     static defaultState: ChatStateModel = {
         chats: [],
@@ -21,8 +19,9 @@ export class ChatState implements NgxsOnInit {
             user_id: 'ramesh1'
         }
     };
-
-    constructor(private chatService: ChatService) { }
+    ngxsOnInit(ctx?: StateContext<any>) {
+        this.chatService.getChats();
+    }
 
     @Action(SaveContacts)
     async saveContacts(ctx: StateContext<ChatStateModel>, action: SaveContacts) {
