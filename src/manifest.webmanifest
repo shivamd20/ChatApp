@@ -2,7 +2,7 @@
   "name": "Ramu's ChatApp",
   "short_name": "Ramu's ChatApp",
   "theme_color": "rgb(123, 31, 162)",
-  "background_color": "#fafafa",
+  "background_color": "rgb(123, 31, 162)",
   "display": "standalone",
   "scope": "/ChatApp",
   "start_url": "/ChatApp",
