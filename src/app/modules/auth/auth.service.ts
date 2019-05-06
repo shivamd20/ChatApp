@@ -52,7 +52,7 @@ export class AuthService {
 
     logout() {
         this.auth0.logout({
-            returnTo: `http://${window.location.host}/${path}`,
+            returnTo: `http://${window.location.host}${path}`,
             clientID: CLIENT_ID
         });
     }

@@ -23,6 +23,15 @@ export class ChatService implements OnDestroy {
     }
 
     public getChats() {
+
+        const profile = this.store.snapshot().auth.profile;
+
+        if (!profile) {
+            return;
+        }
+
+        const user_id = profile.sub;
+
         if (!this.chats$ || this.chats$.closed) {
             this.chats$ = this.apollo.subscribe({
                 query: gql`subscription ($user_id: String) {
@@ -44,7 +53,7 @@ export class ChatService implements OnDestroy {
                   }
               `,
                 variables: {
-                    'user_id': this.store.snapshot().auth.profile.sub
+                    'user_id': user_id
                 }
             },
             ).pipe(retry(10), map(val => val.data.chat)).subscribe(data => {
