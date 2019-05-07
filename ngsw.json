@@ -1,0 +1,71 @@
+{
+  "configVersion": 1,
+  "index": "/ChatApp/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/ChatApp/favicon.ico",
+        "/ChatApp/index.html",
+        "/ChatApp/main.69432af434f6c7004487.js",
+        "/ChatApp/polyfills.c1991d742de9cae778fc.js",
+        "/ChatApp/runtime.ec2944dd8b20ec099bf3.js",
+        "/ChatApp/styles.0cda43c67f58f5d4ee0e.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/ChatApp/assets/icons/icon-128x128.png",
+        "/ChatApp/assets/icons/icon-144x144.png",
+        "/ChatApp/assets/icons/icon-152x152.png",
+        "/ChatApp/assets/icons/icon-192x192.png",
+        "/ChatApp/assets/icons/icon-384x384.png",
+        "/ChatApp/assets/icons/icon-512x512.png",
+        "/ChatApp/assets/icons/icon-72x72.png",
+        "/ChatApp/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/ChatApp/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/ChatApp/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/ChatApp/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/ChatApp/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/ChatApp/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/ChatApp/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/ChatApp/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/ChatApp/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/ChatApp/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/ChatApp/index.html": "a91b23cdb8518b092fe8677d09c28966dc4582bf",
+    "/ChatApp/main.69432af434f6c7004487.js": "4bc756c9c47bd28c372738694b39f50ecb514f31",
+    "/ChatApp/polyfills.c1991d742de9cae778fc.js": "6946e10a03311677a01490b8e91741668e64e17e",
+    "/ChatApp/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/ChatApp/styles.0cda43c67f58f5d4ee0e.css": "caee84b91caf79de94e5abe7a0d9a055d805c5e9"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
