@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Actions, Select, ofActionSuccessful } from '@ngxs/store';
-import { Logout, Login } from 'src/app/modules/ngrxstate/actions/auth.action';
+import { Logout, Login, GetProfile } from 'src/app/modules/ngrxstate/actions/auth.action';
 import { DeleteAllChats } from 'src/app/modules/ngrxstate/actions/chat.action';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-profile',
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
 
 
     @Select(state => state.auth.profile)
-    profile$: any;
+    profile$: Observable<any>;
 
 
     constructor(private store: Store, private actions$: Actions, private snackBar: MatSnackBar) { }
@@ -27,6 +28,10 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        if (!this.profile$) {
+            this.store.dispatch(new GetProfile());
+        }
 
     }
 
